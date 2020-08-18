@@ -75,14 +75,6 @@ export class ClimateMap extends Component {
     this.setState({ hovered: false });
   }
 
-  // shouldComponentUpdate( nextProps, nextState ){
-  //   if (this.state.coords !== nextState.coords){
-  //     return false
-  //   } else {
-  //     return true
-  //   }
-  // }
-
   componentWillUnmount() {
     this.clearTimer();
   }
@@ -340,11 +332,6 @@ export class ClimateMap extends Component {
       showInfo: true
     })
   }
-
-  // showInfo = () => {
-  //   console.log('works')
-  // }
-
 
   addLocation = () => {
     console.log('I WAS CLICKED!!!!')
@@ -817,69 +804,9 @@ export class ClimateMap extends Component {
           </CardContent>
         </Card>
       : null}
-      {/* <UserLocations goToLocation={this.goToLocation}
-      /> */}
-      {/* <Card  fluid color='blue'>
-      <Card.Header><h3>{this.state.data !== false ? this.state.data.city.name:null}</h3></Card.Header>
-    <Image src={FlexImage} wrapped ui={false} />
-    <Card.Content>
-      <Card.Header>{this.state.data !== false ? 'Air Quality Index: ' + this.state.data.aqi :null}</Card.Header>
-      <Card.Meta>updated {this.state.data !== false ? + '' + -hours + ' hrs & ' + -minutes + ' mins ago - ' + this.state.data.time.s:null}</Card.Meta>
-      <Card.Description>
-      {this.state.data !== false && this.state.data.forecast.daily !== undefined ? <Line
-          data={config}
-          options={{
-            responsive: true,
-            tooltips: {
-              mode: 'index',
-              intersect: false,
-              callbacks: { 
-                label: function(tooltipItem) {
-                  return Number(tooltipItem.yLabel) + " µg/m³";}
-              },
-              displayColors: true,
-            },
-            title: {
-              display:false,
-              text:'Local Air Quality pm10 Forecast',
-              fontSize:20
-            },
-            legend:{
-              display:false,
-              position:'top'
-            }
-          }}
-        /> : null }
-      </Card.Description>
-    </Card.Content>
-    <Card.Content extra>
-      <a onClick={this.addLocation}>
-        <Icon name='user' 
-              />
-        Add {this.state.data !== false ? this.state.data.city.name:null} To Favorites
-      </a>
-    </Card.Content>
-    <UserLocations goToLocation={this.goToLocation}/>
-    </Card> */}
-
       </div>
       </Grid>
     </Grid>
-    {/* <Grid >
-    <Grid.Row> */}
-      
-     
-      {/* <div className='location'> */}
- 
-
-   
-
-
-    
-   
-      {/* </Grid.Column>
-    </Grid.Row>
-    </Grid> */}
     </div>
     </ThemeProvider>
     )

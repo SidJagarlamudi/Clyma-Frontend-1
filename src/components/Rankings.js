@@ -73,15 +73,11 @@ class Rankings extends React.Component {
   render(){ 
     console.log(this.props.stats)
     this.renderNews()
-    // if (this.props.stats.length !== 0){
     return (
       <div>
        <NewsCard/>
        <h1>Rankings</h1>
       </div>)
-    // } else {
-    //   return null
-    // }
   };
 }
 

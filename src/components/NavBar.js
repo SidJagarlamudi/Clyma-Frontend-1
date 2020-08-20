@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect, withRouter } from 'react-router-dom';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
@@ -10,11 +10,13 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { logoutUser } from '../actions/auth'
 import { connect } from 'react-redux'
-import Rankings from './Rankings'
+import NewsFeed from './NewsFeed';
+import { useHistory } from "react-router";
 
 
 
 const NavBar = props => {
+  const history2 = useHistory();
   const { match, history } = props;
   const { params } = match;
   const { page } = params;
@@ -22,23 +24,23 @@ const NavBar = props => {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#FFFFFF',
+        main: '#c6ff00',
       },
       secondary: {
-        main: '#f44336',
+        main: '#FFFFFF',
       },
     },
   });
 
   const tabNameToIndex = {
     0: "home",
-    1: "login",
-    2: 'rankings'
+    1: 'news',
+    2: "login",
   }
   const indexToTabName = {
     home: 0,
-    login: 1,
-    rankings: 2
+    news: 1,
+    login: 2,
   };
 
   const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
@@ -48,33 +50,39 @@ const NavBar = props => {
     setSelectedTab(newValue);
   };
 
+  const handleLogout = () => {
+    history.push('/login')
+    localStorage.removeItem('token')
+  
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
-        <div className='menu'>
+        <div className='menu2'>
         <Tabs value={selectedTab} onChange={handleChange} indicatorColor="primary">
-          <Tab label="Home" />
+          <Tab label="Home" className={"menu-tab"}/>
+          <Tab label="News" className={"menu-tab"}/>
           { 
           props.auth ?
-          <Tab label="Logout" />
+          <div className={"menu-logout-tab"}>
+          <Tab label="Logout" onClick={handleLogout} className={"menu-tab"}/>
+          </div>
           :
-          <Tab label="Login" />
+          <div className={"menu-login-tab"}>
+
+            <Tab label="Login" />
+          </div>
         }
-          <Tab label="Rankings"/>
         </Tabs>
         </div>
       </AppBar>
       {selectedTab === 0 && <Dashboard {...props}/>}
-      {selectedTab === 1 && <Login {...props}/>}
-      {selectedTab === 2 && <Rankings {...props}/>}
+      {selectedTab === 1 && <NewsFeed {...props}/>}
+      {selectedTab === 2 && <Login style={{backgroundColor: '#303030'}}{...props}/>}
       </ThemeProvider>
   );
 };
-
-const handleLogout = () => {
-  this.props.logoutUser()
-  localStorage.removeItem('token')
-}
 
 const mapStateToProps = (state) => {
   return {
@@ -86,4 +94,4 @@ const mapDispatchToProps = {
   logoutUser
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))

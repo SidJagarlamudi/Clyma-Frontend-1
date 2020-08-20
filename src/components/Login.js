@@ -1,7 +1,7 @@
 import React from 'react';
 import { loginSuccess } from '../actions/auth'
 import { connect }  from 'react-redux'
-
+import LoginBG from './LoginBG'
 
 class Login extends React.Component {
   constructor(props){
@@ -41,16 +41,22 @@ class Login extends React.Component {
   render(){
     return (
       <div>
-        <h3>Please sign-in below!</h3>
+      <div className="login-comp">
+        <div className='login-form'>
         <form onSubmit={this.handleSubmit.bind(this)}>
+        <span className='label'>Please Sign-In!</span>
           <input name={'username'} placeholder='username' onChange={this.handleInputChange} value={this.state.username} />
           <input name={'password'} placeholder='password' onChange={this.handleInputChange} value={this.state.password} />
           <input type='submit' value='login' />
         </form>
+        </div>
+        <LoginBG/>
+      </div>
       </div>
     );
   }
 }
+document.body.style = 'background: #424242;';
 
 const mapDispatchToProps = {
   loginSuccess

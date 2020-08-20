@@ -12,6 +12,22 @@ import RoomIcon from '@material-ui/icons/Room';
 
 export class UserLocations extends Component {
 
+  state={
+    usersLocations: false
+  }
+
+  componentDidMount(){
+    fetch('http://localhost:3001/locations')
+    .then(resp => resp.json())
+    .then(locations => {
+      console.log(this.props)
+      console.log(this.state)
+      const myLocations = locations.filter(loc => loc.user_id === this.props.auth.id)
+      console.log(myLocations)
+      this.setState({usersLocations: myLocations})
+    })
+  }
+
   handleDelete = (id) => {
     console.log('i was clicked!')
     const reqObj = {
@@ -23,33 +39,43 @@ export class UserLocations extends Component {
     fetch(`http://localhost:3001/locations/${id}`, reqObj)
     .then(resp => resp.json())
     .then(data => {
+      console.log(data)
       this.props.deleteLocationSuccess(id)
+      this.setState({
+        usersLocations: this.state.usersLocations.filter((loc => loc.id !== data.id))
+      })
     })
   }
 
   render(){
-    return this.props.locations.map((location)=>{
-      return <div>
-        <Card variant='outlined'>
+    console.log(this.state)
+    if (this.state.usersLocations === false){
+      return <div><h4>You have no saved locations.</h4></div>
+    } else {
+    return this.state.usersLocations.map((location)=>{
+      return <div className='location-card'>
+        <Card className={"hovered-location"} variant='outlined'>
           <CardContent>
         <span style={{'font-size': '18px'}}>{location.name}</span>
-        <IconButton onClick={()=>this.handleDelete(location.id)} color="white" aria-label="delete">
+        <IconButton className={"delete-btn"} onClick={()=>this.handleDelete(location.id)} color="white" aria-label="delete">
         <DeleteIcon />
           </IconButton>
-          <IconButton onClick={()=>this.props.clicked(location)} color="white" aria-label="delete">
+          <IconButton className={"go-btn"} onClick={()=>this.props.clicked(location)} color="white" aria-label="delete">
         <RoomIcon />
           </IconButton>
         </CardContent>
         </Card>
       </div>
-    })
+      })
+    // return <div><h1>chill react</h1></div>
+    }
   }
 
 }
 
 const mapStateToProps = (state) => {
   return {
-    locations: state.locations,
+    auth: state.auth,
   }
 }
 

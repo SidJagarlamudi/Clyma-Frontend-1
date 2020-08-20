@@ -36,7 +36,8 @@ import Button from '@material-ui/core/Button';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import IconButton from '@material-ui/core/IconButton';
-
+import { green } from '@material-ui/core/colors';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
 
 export class ClimateMap extends Component {
   constructor(){
@@ -65,6 +66,8 @@ export class ClimateMap extends Component {
     markersRendered: false,
     showUserLocations: false,
     hovered: false,
+    myLocations: [],
+    saveDisabled: false,
   }
 
   mouseEnterHandler = (marker,e) => {
@@ -80,6 +83,7 @@ export class ClimateMap extends Component {
   }
 
   onTimeout = () => {
+    console.log(this.props.locations)
     console.log(this.state.activeMarker)
     fetch(`https://api.waqi.info/feed/geo:${this.state.activeMarker.info.lat};${this.state.activeMarker.info.lon}/?token=87b2bba6a5b2e26c577ffc48e297eaed82a8408c`)
       .then(resp => resp.json())
@@ -113,10 +117,21 @@ export class ClimateMap extends Component {
   
 
   componentDidMount(){
+    fetch('http://localhost:3001/locations')
+    .then(resp => resp.json())
+    .then(locations => {
+      console.log(this.props)
+      console.log(this.state)
+      const usersLocations = locations.filter(loc => loc.user_id === this.props.auth.id)
+      this.setState({
+        myLocations: usersLocations
+        })
+      })
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude
       let lng = position.coords.longitude
       let currentLocation = {lat: lat,lng: lng}
+      console.log(currentLocation)
       this.setState({
         coords: currentLocation
       })
@@ -350,6 +365,7 @@ export class ClimateMap extends Component {
         this.props.createLocationSuccess(newLocation)
       })
     }
+    console.log(this)
   }
     
   goToLocation = (location) => {
@@ -361,10 +377,10 @@ export class ClimateMap extends Component {
       .then(data => {
         this.setState({
           data: data.data,
-          showUserLocations: false
         })
         console.log(data)
       })
+    console.log(this.state.data)
   }
 
   showMyList = () => {
@@ -381,6 +397,7 @@ export class ClimateMap extends Component {
   }
 
   render() {
+    console.log(this.state)
     let o3Data
     let pm10Data
     let days
@@ -523,8 +540,9 @@ export class ClimateMap extends Component {
     let saveDisabled
     if (this.state.data !== false && this.props.locations !== [] && this.props.locations.some(loc => loc.name === this.state.data.city.name)) {
       saveDisabled = true
+    } else {
+      saveDisabled = false
     }
-   
     return(
       <ThemeProvider theme={darkTheme}>
       <div className='nav'>
@@ -534,7 +552,7 @@ export class ClimateMap extends Component {
        direction="row"
        justify="flex-start"
        alignItems="flex-start"
-     container spacing={0}>
+       container spacing={0}>
        <div className='search'>
       <GooglePlacesAutocomplete 
         ref={(search) => this._search = search}
@@ -630,7 +648,7 @@ export class ClimateMap extends Component {
         </IconButton>
           </div>
           <div className='next2'>
-        <IconButton onClick={this.showMyList} color="white" aria-label="next">
+        <IconButton className={"go-and-back"} onClick={this.showMyList} color="white" aria-label="next">
           <ArrowForwardIosIcon />
           </IconButton>
           </div>
@@ -765,20 +783,26 @@ export class ClimateMap extends Component {
           />
           </div>
           
-          : null }
+          : <div><h1>Welcome to MyClimate.</h1><h2>Click a location for details.</h2></div> }
         </CardContent>
         <CardActions>
         <div className='save'>
-        <Button
+        <IconButton className={"upload-icon"} disabled={saveDisabled} onClick={this.addLocation}>
+        <SaveAltIcon fontSize="large" />
+        </IconButton>
+      
+        {/* <Button
           variant="contained"
+          
           color="primary"
+          className={"upload-icon"}
           size="large"
           disabled={saveDisabled}
           onClick={this.addLocation}
-          startIcon={<SaveIcon />}
+          startIcon={>}
         >
-          Save Location
-        </Button>
+          Save Location */}
+        {/* </Button>  */}
         </div>
         </CardActions>
         </Card>
@@ -791,8 +815,8 @@ export class ClimateMap extends Component {
           </Typography>
         <div className='next'>
        
-          <IconButton onClick={this.showStats} color="white" aria-label="next" >
-        <ArrowBackIosIcon />
+          <IconButton onClick={this.showStats} className="go-and-back" color="white" aria-label="next" >
+        <ArrowBackIosIcon/>
         </IconButton>
           </div>
           <div className='next2'>
@@ -800,7 +824,7 @@ export class ClimateMap extends Component {
           <ArrowForwardIosIcon />
           </IconButton>
           </div>
-          <UserLocations clicked={this.goToLocation}/>
+          <UserLocations locations={this.state.myLocations} clicked={this.goToLocation}/>
           </CardContent>
         </Card>
       : null}
@@ -812,6 +836,7 @@ export class ClimateMap extends Component {
     )
   }
 }
+document.body.style = 'background: #424242;';
 
 const mapStateToProps = (state) => {
   return {

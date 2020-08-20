@@ -31,22 +31,6 @@ class Dashboard extends React.Component {
         console.log(data)
         this.props.currentUser(data)
       })
-      if (this.props.auth !== null){
-
-        fetch('http://localhost:3001/locations')
-        .then(resp => resp.json())
-        .then(locations => {
-          console.log(this.props)
-          console.log(this.state)
-          const usersLocations = locations.filter(loc => loc.user_id === this.props.auth.id)
-          this.props.fetchLocationsSuccess(usersLocations)
-        })
-      }
-      // fetch('http://localhost:3001/users')
-      // .then(resp => resp.json())
-      // .then(data => {
-      //   this.props.fetchUsersSuccess(data)
-      // })
       fetch('https://api.waqi.info/map/bounds/?latlng=85,-180,-85.05115,180&token=87b2bba6a5b2e26c577ffc48e297eaed82a8408c')
       .then(resp => resp.json())
       .then(stations => {
@@ -55,11 +39,14 @@ class Dashboard extends React.Component {
         console.log(y)
         this.props.fetchStatSuccess(x)
       })
-      fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=1000-largest-us-cities-by-population-with-geographic-coordinates&q=&rows=1000&sort=-rank&facet=city&facet=state')
-      .then(resp => resp.json())
-      .then(cities => {
-        this.props.fetchCitiesSuccess(cities.records)
-      })
+    //   fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=1000-largest-us-cities-by-population-with-geographic-coordinates&q=&rows=1000&sort=-rank&facet=city&facet=state')
+    //   .then(resp => resp.json())
+    //   .then(cities => {
+    //     this.props.fetchCitiesSuccess(cities.records)
+    //   })
+    //   console.log(this.props)
+    //   console.log(this.state)
+    // }
     }
   }
 
@@ -76,6 +63,7 @@ class Dashboard extends React.Component {
     }
   };
 }
+
 
 const mapStateToProps = (state) => {
   return {

@@ -3,47 +3,26 @@ import { GoogleApiWrapper, Map, Marker, InfoWindow} from 'google-maps-react';
 import GooglePlacesAutocomplete from 'react-google-places-autocomplete';
 import 'react-google-places-autocomplete/dist/index.min.css';
 import Geocode from "react-geocode";
-import ClimateScore from './ClimateScore'
 import Grid from '@material-ui/core/Grid';
-import { Dropdown, Checkbox, Image, Segment } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
 import mapStyles from './mapStyles'
 import Markers from './Markers'
-import {HorizontalBar, Bar, Line} from 'react-chartjs-2';
-import xyz from './xyz.jpg'
-import LessThan25AQI from '../images/LessThan25AQI.jpg'
-import LessThan50AQI from '../images/LessThan50AQI.jpg'
-import LessThan100AQI from '../images/LessThan100AQI.jpg'
-import LessThan150AQI from '../images/LessThan150AQI.jpg'
-import LessThan200AQI from '../images/LessThan200AQI.jpg'
-import LessThan300AQI from '../images/LessThan300AQI.jpg'
-import Over300AQI from '../images/Over300AQI.jpg'
-import { fetchCitiesSuccess } from "../actions/city";
+import {Line, Doughnut} from 'react-chartjs-2';
 import UserLocations from './UserLocations'
 import { createLocationSuccess } from '../actions/location'
 import { connect } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import SaveIcon from '@material-ui/icons/Save';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import IconButton from '@material-ui/core/IconButton';
-import { green } from '@material-ui/core/colors';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import aqiTable from '../images/aqiTable.png'
-
 
 export class ClimateMap extends Component {
   constructor(){
@@ -67,14 +46,15 @@ export class ClimateMap extends Component {
     },
     showInfo: false,
     activeMarker: {},
-    selectedPlace: {},
+    activeCSMarker: false,
     data: false,
     markersRendered: false,
     showUserLocations: false,
     hovered: false,
     myLocations: [],
     saveDisabled: false,
-    modalOpen: 'none'
+    modalOpen: 'none',
+    mapStyle: null,
   }
 
   mouseEnterHandler = (marker,e) => {
@@ -231,8 +211,6 @@ export class ClimateMap extends Component {
         }
       })
       this._map.map.setCenter({lat: lat, lng: lng})  
-      this._marker.marker.setPosition({lat: lat, lng: lng}) 
-      console.log(this._search) 
       this._search.clearValue()
       fetch(`https://climate-score.p.rapidapi.com/${lat}/${lng}`, {
         "method": "GET",
@@ -281,13 +259,27 @@ export class ClimateMap extends Component {
     })
   }
 
+  showClimateScore = (marker) => {
+    const newLat = marker.position.lat
+    const newLon = marker.position.lng
+    Geocode.setApiKey("AIzaSyDmc1KD6Xr80d3hduc4Q2MObw1uotQuY-8");
+    Geocode.fromLatLng(newLat, newLon).then(
+      response => {
+        const newAddress = response.results[0].formatted_address;
+        this.setState({
+        address: newAddress,
+        activeCSMarker: marker
+        })
+      })
+  }
+
   renderClimateScores = () => {
     return this.props.climateScores.map((score)=>{
       const numberString = score.ClimateScore.toString()
       const google = this.props.google
       let iw = 83,
       ih = 107
-      return <Marker position={{lat: score.lat, lng: score.lng}}
+      return <Marker score={score} onClick={this.showClimateScore} position={{lat: score.lat, lng: score.lng}}
       icon={{
         url: `https://waqi.info/mapicon/${numberString}.50.png`,
         anchor: new google.maps.Point(iw / 4, ih / 2 - 5),
@@ -300,26 +292,18 @@ export class ClimateMap extends Component {
   
   labelClicked = (e) => {
     console.log('working')
-    console.log(e.nativeEvent.target.innerHTML)
+    console.log(e.target.innerHTML)
     if (e.nativeEvent.target.innerHTML === 'Climate Score™'){
       this.setState({
         showAQI: false
       })
     } else {
       this.setState({
-        showAQI: true
+        showAQI: true,
+        activeCSMarker: false
       })
     }
   }
-
-  // markerHover = () => {
-  //   const google = this.props.google
-  //   if (this._marker.marker.getAnimation() !== null) {
-  //     this._marker.marker.setAnimation(null);
-  //   } else {
-  //     this._marker.marker.setAnimation(google.maps.Animation.BOUNCE);
-  //   }
-  // }
 
   mouseOut = e => {
     this.setState({
@@ -347,7 +331,6 @@ export class ClimateMap extends Component {
   }  
   
   onMarkerHover = (props, marker, e) => {
-
     console.log(marker)
     console.log(e)
     this.setState({
@@ -385,6 +368,7 @@ export class ClimateMap extends Component {
       .then(data => {
         this.setState({
           data: data.data,
+          showUserLocations: false
         })
         console.log(data)
       })
@@ -415,6 +399,7 @@ export class ClimateMap extends Component {
   };
 
   render() {
+    console.log(this.state.mapStyle)
     let aqiColor
     if (this.state.data !== false && this.state.data.aqi <= 50){
       aqiColor = '#c1ff7a'
@@ -429,6 +414,14 @@ export class ClimateMap extends Component {
     } else {
       aqiColor = '#b2b9e1'
     }
+    let climColor
+    if (this.state.activeCSMarker !== false && this.state.activeCSMarker.score.ClimateScore <= 25){
+      climColor = '#c1ff7a'
+    } else if (this.state.activeCSMarker !== false && this.state.activeCSMarker.score.ClimateScore <= 50){
+      climColor = '#ffff33'
+    } else {
+      climColor = '#ffc570'
+    }
     console.log(this.state)
     let o3Data
     let uviData
@@ -437,6 +430,78 @@ export class ClimateMap extends Component {
     let days
     let hours
     let minutes 
+    let droughtData
+    let fireData
+    let seaData
+    let stormData
+    let tempData
+    if (this.state.activeCSMarker){
+      droughtData = {
+        datasets: [{
+          data: [this.state.activeCSMarker.score.DroughtScore, 100 - this.state.activeCSMarker.score.DroughtScore],
+          backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          ],
+          hoverBackgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          ]
+          }]
+        }
+      fireData = {
+        datasets: [{
+          data: [this.state.activeCSMarker.score.FireScore, 100 - this.state.activeCSMarker.score.FireScore],
+          backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          ],
+          hoverBackgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          ]
+          }]
+        }
+      seaData = {
+        datasets: [{
+          data: [this.state.activeCSMarker.score.SeaLevelScore, 100 - this.state.activeCSMarker.score.SeaLevelScore],
+          backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          ],
+          hoverBackgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          ]
+          }]
+        }
+      stormData = {
+        datasets: [{
+          data: [this.state.activeCSMarker.score.StormScore, 100 - this.state.activeCSMarker.score.StormScore],
+          backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          ],
+          hoverBackgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          ]
+          }]
+        }
+      tempData = {
+        datasets: [{
+          data: [this.state.activeCSMarker.score.TempScore, 100 - this.state.activeCSMarker.score.TempScore],
+          backgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          ],
+          hoverBackgroundColor: [
+          '#FF6384',
+          '#36A2EB',
+          ]
+          }]
+        }
+    } 
     if (this.state.data !== false ){
       let now = new Date().getTime();
       let newDate = new Date(this.state.data.time.iso).getTime()
@@ -621,17 +686,6 @@ export class ClimateMap extends Component {
         value: 'Air Quality Index',
       }
     ] 
-    let response
-    if (this.state.data !== false){
-      if(this.state.data.aqi <= 25){
-        response = 'Great Quality!'
-      } else if (this.state.data.aqi <= 50){
-        response = 'Good'
-      } else {
-        response = 'HIGH'
-      }
-    }
-    
     const darkTheme = createMuiTheme({
       palette: {
         type: 'dark',
@@ -674,7 +728,7 @@ export class ClimateMap extends Component {
         <div className='location'>
       <Map  ref={(map) => this._map = map}
             google={this.props.google}
-            styles={mapStyles}
+            styles={this.state.mapStyle}
             disableDefaultUI={true}
             streetViewControl={true}
             zoomControl={true}
@@ -741,8 +795,106 @@ export class ClimateMap extends Component {
       </div>
       </Grid>
       <Grid item xs={4}>
-      <div className='hello'>         
-      {!this.state.showUserLocations ?  
+      <div className='hello'>
+      {this.state.activeCSMarker ? 
+      <Card variant="outlined" style={{maxHeight: 718, overflow: 'auto'}}>
+      <CardContent>
+        <Typography variant="h4" component="h2" style={{color: climColor}}>
+        {this.state.activeCSMarker !== false ? 'Climate Score: ' + this.state.activeCSMarker.score.ClimateScore :null} 
+        </Typography>
+      <Typography variant="h5" component="h2">
+        {this.state.activeCSMarker !== false ? this.state.address:null}
+        </Typography>
+      <div class='clim-score'>
+        <h1>{this.state.activeCSMarker.score.DroughtScore}</h1>
+        </div>
+        <Doughnut data={droughtData} 
+          options={{
+          responsive: true,
+          title: {
+            display:true,
+            text:'Drought Score',
+            fontSize:18,
+            fontColor: '#FFFFFF'
+          },
+          legend:{
+            display:false,
+          }
+        }}
+          />
+          <div class='clim-score'>
+        <h1>{this.state.activeCSMarker.score.StormScore}</h1>
+        </div>
+          <Doughnut data={stormData} 
+          options={{
+          responsive: true,
+          title: {
+            display:true,
+            text:'Storm Score',
+            fontSize:18,
+            fontColor: '#FFFFFF'
+          },
+          legend:{
+            display:false,
+          }
+        }}
+          />
+          <div class='clim-score'>
+        <h1>{this.state.activeCSMarker.score.TempScore}</h1>
+        </div>
+          <Doughnut data={tempData} 
+          options={{
+          responsive: true,
+          title: {
+            display:true,
+            text:'Temperature Score',
+            fontSize:18,
+            fontColor: '#FFFFFF'
+          },
+          legend:{
+            display:false,
+          }
+        }}
+          />
+                     <div class='clim-score'>
+        <h1>{this.state.activeCSMarker.score.FireScore}</h1>
+        </div>
+          <Doughnut data={fireData} 
+          options={{
+          responsive: true,
+          title: {
+            display:true,
+            text:'Fire Score',
+            fontSize:18,
+            fontColor: '#FFFFFF'
+          },
+          legend:{
+            display:false,
+          }
+        }}
+          />
+          <div class='clim-score'>
+        <h1>{this.state.activeCSMarker.score.SeaLevelScore}</h1>
+        </div>
+          <Doughnut data={seaData} 
+          options={{
+          responsive: true,
+          title: {
+            display:true,
+            text:'Sea Level Score',
+            fontSize:18,
+            fontColor: '#FFFFFF'
+          },
+          legend:{
+            display:false,
+          }
+        }}
+          />
+      </CardContent>
+      </Card>
+    : null
+    }         
+      {!this.state.showUserLocations && this.state.showAQI ?  
        <Card variant="outlined" style={{maxHeight: 718, overflow: 'auto'}}>
         <CardContent>
           <div className='next2'>
@@ -752,11 +904,9 @@ export class ClimateMap extends Component {
           </div>
           <Typography variant="h5" component="h2" style={{color: aqiColor}}>
           {this.state.data !== false ? 'Air Quality Index: ' + this.state.data.aqi :null} 
-          {this.state.data !== false ? <div class='help-icon-root'>
-          <span> <IconButton className={"help-icon"} onMouseOver={()=>this.openModal()} onMouseOut={()=>this.handleModalClose()} color="white" >
-          <HelpOutlineIcon/>
-          </IconButton></span>
-          </div> : null}
+          {this.state.data !== false ? <span> <IconButton className={"help-icon"} onMouseOver={()=>this.openModal()} onMouseOut={()=>this.handleModalClose()} color="white" >
+          <HelpOutlineIcon style={{color: 'rgba(255, 255, 255, 0.5)'}}/>
+          </IconButton></span> : null}
           </Typography>
           <Typography variant="h4" component="h2">
           {this.state.data !== false ? this.state.data.city.name:null}
@@ -786,7 +936,7 @@ export class ClimateMap extends Component {
             },
               tooltips: {
                 mode: 'index',
-                intersect: false,
+                intersect: true,
                 callbacks: { 
                   label: function(tooltipItem) {
                     return Number(tooltipItem.yLabel) + " µg/m³";}
@@ -928,8 +1078,7 @@ export class ClimateMap extends Component {
         </CardContent>
         <CardActions>
         <div className='save'>
-        {this.state.data !== false ?
-        <IconButton className={"upload-icon"} disabled={saveDisabled} onClick={this.addLocation}>
+        {this.state.data !== false ? <IconButton className={"upload-icon"} disabled={saveDisabled} onClick={this.addLocation}>
         <SaveAltIcon fontSize="large" />
         </IconButton> : null}
         </div>

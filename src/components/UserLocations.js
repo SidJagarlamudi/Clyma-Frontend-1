@@ -56,13 +56,17 @@ export class UserLocations extends Component {
       return <div className='location-card'>
         <Card className={"hovered-location"} variant='outlined'>
           <CardContent>
+            <div class='loc-card-name'>
         <span style={{'font-size': '18px'}}>{location.name}</span>
+        </div>
+        <div class='loc-icons'>
         <IconButton className={"delete-btn"} onClick={()=>this.handleDelete(location.id)} color="white" aria-label="delete">
         <DeleteIcon />
           </IconButton>
           <IconButton className={"go-btn"} onClick={()=>this.props.clicked(location)} color="white" aria-label="delete">
         <RoomIcon />
           </IconButton>
+        </div>
         </CardContent>
         </Card>
       </div>

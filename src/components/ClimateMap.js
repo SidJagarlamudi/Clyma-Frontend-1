@@ -38,6 +38,12 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import IconButton from '@material-ui/core/IconButton';
 import { green } from '@material-ui/core/colors';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import aqiTable from '../images/aqiTable.png'
+
 
 export class ClimateMap extends Component {
   constructor(){
@@ -68,6 +74,7 @@ export class ClimateMap extends Component {
     hovered: false,
     myLocations: [],
     saveDisabled: false,
+    modalOpen: 'none'
   }
 
   mouseEnterHandler = (marker,e) => {
@@ -305,14 +312,15 @@ export class ClimateMap extends Component {
     }
   }
 
-  markerHover = () => {
-    const google = this.props.google
-    if (this._marker.marker.getAnimation() !== null) {
-      this._marker.marker.setAnimation(null);
-    } else {
-      this._marker.marker.setAnimation(google.maps.Animation.BOUNCE);
-    }
-  }
+  // markerHover = () => {
+  //   const google = this.props.google
+  //   if (this._marker.marker.getAnimation() !== null) {
+  //     this._marker.marker.setAnimation(null);
+  //   } else {
+  //     this._marker.marker.setAnimation(google.maps.Animation.BOUNCE);
+  //   }
+  // }
+
   mouseOut = e => {
     this.setState({
       showInfo: false
@@ -384,7 +392,6 @@ export class ClimateMap extends Component {
   }
 
   showMyList = () => {
-    console.log('YAYY you are a coding GOD')
     this.setState({
       showUserLocations: true
     })
@@ -396,10 +403,37 @@ export class ClimateMap extends Component {
     })
   }
 
+  openModal = () => {
+    this.setState({
+      modalOpen: 'block'
+    })
+  };
+  handleModalClose = () => {
+    this.setState({
+      modalOpen: 'none'
+    })
+  };
+
   render() {
+    let aqiColor
+    if (this.state.data !== false && this.state.data.aqi <= 50){
+      aqiColor = '#c1ff7a'
+    } else if (this.state.data !== false && this.state.data.aqi <= 100){
+      aqiColor = '#ffff33'
+    } else if (this.state.data !== false && this.state.data.aqi <= 150){
+      aqiColor = '#ffc570'
+    } else if (this.state.data !== false && this.state.data.aqi <= 200){
+      aqiColor = '#f6685e'
+    } else if (this.state.data !== false && this.state.data.aqi <= 300){
+      aqiColor = '#ea80fc'
+    } else {
+      aqiColor = '#b2b9e1'
+    }
     console.log(this.state)
     let o3Data
+    let uviData
     let pm10Data
+    let pm25Data
     let days
     let hours
     let minutes 
@@ -491,6 +525,88 @@ export class ClimateMap extends Component {
             }
           ],
         }
+      }
+      if (this.state.data.forecast.daily !== undefined && 'pm25' in this.state.data.forecast.daily){
+        let labelArr = [], avgArr = [], minArr = [], maxArr = []
+        for(let i=0;i<this.state.data.forecast.daily.pm25.length;i++){
+          labelArr.push((new Date(this.state.data.forecast.daily.pm25[i].day)).toString().substring(0, 10))
+          avgArr.push(this.state.data.forecast.daily.pm25[i].avg)
+          minArr.push(this.state.data.forecast.daily.pm25[i].min)
+          maxArr.push(this.state.data.forecast.daily.pm25[i].max)
+        }
+        pm25Data = {
+          labels: labelArr, 
+          datasets: [
+            {
+              label: "max",
+              backgroundColor: '#f7ff66',
+              borderColor: "#f7ff66",
+              borderWidth: 0,
+              data: maxArr,
+              fill: "1",
+              radius: 1,
+            },
+            {
+              label: "avg",
+              backgroundColor: '#4a9eff',
+              borderColor: '#4a9eff',
+              borderWidth: 1,
+              data: avgArr,
+              fill: "-1",line: false,
+              radius: 5
+            },
+            {
+              label: "min",
+              backgroundColor: '#87ff9f',
+              borderColor: "#87ff9f",
+              borderWidth: 0,
+              data: minArr,line: false,
+              fill: '1',
+              radius: 1,
+            }
+          ],
+        }
+      }
+      if (this.state.data.forecast.daily !== undefined && 'uvi' in this.state.data.forecast.daily){
+        let labelArr = [], avgArr = [], minArr = [], maxArr = []
+        for(let i=0;i<this.state.data.forecast.daily.uvi.length;i++){
+          labelArr.push((new Date(this.state.data.forecast.daily.uvi[i].day)).toString().substring(0, 10))
+          avgArr.push(this.state.data.forecast.daily.uvi[i].avg)
+          minArr.push(this.state.data.forecast.daily.uvi[i].min)
+          maxArr.push(this.state.data.forecast.daily.uvi[i].max)
+        }
+        uviData = {
+          labels: labelArr, 
+          datasets: [
+            {
+              label: "max",
+              backgroundColor: '#f7ff66',
+              borderColor: "#f7ff66",
+              borderWidth: 0,
+              data: maxArr,
+              fill: "1",
+              radius: 1,
+            },
+            {
+              label: "avg",
+              backgroundColor: '#4a9eff',
+              borderColor: '#4a9eff',
+              borderWidth: 1,
+              data: avgArr,
+              fill: "-1",line: false,
+              radius: 5
+            },
+            {
+              label: "min",
+              backgroundColor: '#87ff9f',
+              borderColor: "#87ff9f",
+              borderWidth: 0,
+              data: minArr,line: false,
+              fill: '1',
+              radius: 1,
+            }
+          ],
+        }
       }  
     }
     const mapOptions = [
@@ -515,23 +631,7 @@ export class ClimateMap extends Component {
         response = 'HIGH'
       }
     }
-    let FlexImage
-    if (this.state.data !== false && this.state.data.aqi <= 25){
-      FlexImage = LessThan25AQI
-    } else if (this.state.data !== false && this.state.data.aqi <= 50){
-      FlexImage = LessThan50AQI
-    } else if (this.state.data !== false && this.state.data.aqi <= 100){
-      FlexImage = LessThan100AQI
-    } else if (this.state.data !== false && this.state.data.aqi <= 150){
-      FlexImage = LessThan150AQI
-    } else if (this.state.data !== false && this.state.data.aqi <= 200){
-      FlexImage = LessThan200AQI
-    } else if (this.state.data !== false && this.state.data.aqi <= 300){
-      FlexImage = LessThan300AQI
-    } else if (this.state.data !== false && this.state.data.aqi > 300){
-      FlexImage = Over300AQI
-    }
-
+    
     const darkTheme = createMuiTheme({
       palette: {
         type: 'dark',
@@ -543,10 +643,13 @@ export class ClimateMap extends Component {
     } else {
       saveDisabled = false
     }
+    let showAqiTable = this.state.modalOpen
     return(
       <ThemeProvider theme={darkTheme}>
       <div className='nav'>
-    
+      <img id='aqiTable' src={aqiTable} alt='aqiTable'
+      style={{display: showAqiTable}}
+      ></img>
      <Grid 
        container
        direction="row"
@@ -557,16 +660,16 @@ export class ClimateMap extends Component {
       <GooglePlacesAutocomplete 
         ref={(search) => this._search = search}
         onSelect={this.handleSubmit}
-        inputStyle={{'background-color': '#424242', color: '#FFFFFF','border-radius': '1px'}}
+        inputStyle={{  background: 'rgba(255, 255, 255, 0.3)', color: '#FFFFFF','border-radius': '1px'}}
               
                                       placeholder='🔎 Search Anywhere!'
-                                      // suggestionsStyles={{container: {width: '50%',height: '100%','border-radius': '1px'}}}
+                                      suggestionsStyles={{background: 'none','border-radius': '1px'}}
                                     />
                                       </div>
-                                      <div className='score'>
+                                      {/* <div className='score'>
                                       <ClimateScore ref={(score)=>this._score = score} map={this._map} onMarkerDragEnd={this.onMarkerDragEnd}
      scores={this.state.allScores}/>
-     </div>
+     </div> */}
       <Grid item xs={8} >
         <div className='location'>
       <Map  ref={(map) => this._map = map}
@@ -613,17 +716,17 @@ export class ClimateMap extends Component {
         </Markers>
         : null}
         {!this.state.showAQI ? this.renderClimateScores() : null}
-        <Marker ref={(marker)=>this._marker = marker}
-                // onClick={this.onMarkerClick}
-                name={'Current location'} 
-                draggable={true}
-                hovered={this.state.hovered}
+        {/* <Marker ref={(marker)=>this._marker = marker */}
+                {/* // onClick={this.onMarkerClick}
+                // name={'Current location'} 
+                // draggable={true}
+                // hovered={this.state.hovered}
                 // onMouseover={this.mouseEnterHandler}
                 // onMouseout={this.mouseLeaveHandler}
                 // onMouseover={()=>this.markerHover()}
-                initialCenter={this.state.coords}
-                position={this.state.coords}
-                onDragend={(t, map, coord) => this.onMarkerDragEnd(coord)}/>
+                // initialCenter={this.state.coords}
+                // position={this.state.coords}
+                // onDragend={(t, map, coord) => this.onMarkerDragEnd(coord)}/> */}
         <InfoWindow
           marker={this.state.activeMarker}
           maxWidth={175}
@@ -640,27 +743,26 @@ export class ClimateMap extends Component {
       <Grid item xs={4}>
       <div className='hello'>         
       {!this.state.showUserLocations ?  
-       <Card variant="outlined" style={{maxHeight: 700, overflow: 'auto'}}>
+       <Card variant="outlined" style={{maxHeight: 718, overflow: 'auto'}}>
         <CardContent>
-          <div className='next'>
-          <IconButton color="white" aria-label="next" disabled>
-        <ArrowBackIosIcon />
-        </IconButton>
-          </div>
           <div className='next2'>
-        <IconButton className={"go-and-back"} onClick={this.showMyList} color="white" aria-label="next">
+        <IconButton className={"go-and-back"} onClick={this.showMyList} color="white" >
           <ArrowForwardIosIcon />
           </IconButton>
           </div>
-          <Typography variant="h5" component="h2">
-            <br></br>
+          <Typography variant="h5" component="h2" style={{color: aqiColor}}>
+          {this.state.data !== false ? 'Air Quality Index: ' + this.state.data.aqi :null} 
+          {this.state.data !== false ? <div class='help-icon-root'>
+          <span> <IconButton className={"help-icon"} onMouseOver={()=>this.openModal()} onMouseOut={()=>this.handleModalClose()} color="white" >
+          <HelpOutlineIcon/>
+          </IconButton></span>
+          </div> : null}
+          </Typography>
+          <Typography variant="h4" component="h2">
           {this.state.data !== false ? this.state.data.city.name:null}
           </Typography>
           <Typography  color="textSecondary">
           {this.state.data !== false ? + '' + -hours + ' hrs & ' + -minutes + ' mins ago - ' + this.state.data.time.s:null}
-          </Typography>
-          <Typography  color="textSecondary" gutterBottom>
-          {this.state.data !== false ? 'Air Quality Index: ' + this.state.data.aqi :null}
           </Typography>
           {this.state.data !== false && this.state.data.forecast.daily !== undefined ? 
           <div>
@@ -732,7 +834,7 @@ export class ClimateMap extends Component {
               },
               title: {
                 display:true,
-                text:'Small Particles (pm10 Forecast)',
+                text:'Large Particles (pm10 Forecast)',
                 fontSize:12,
                 fontColor: '#FFFFFF'
               },
@@ -743,7 +845,7 @@ export class ClimateMap extends Component {
             }}
           />
           <Line
-            data={pm10Data}
+            data={pm25Data}
             options={{
               responsive: true,
               scales: {
@@ -771,7 +873,46 @@ export class ClimateMap extends Component {
               },
               title: {
                 display:true,
-                text:'Small Particles (pm10 Forecast)',
+                text:'Small Particles (pm2.5 Forecast)',
+                fontSize:12,
+                fontColor: '#FFFFFF'
+              },
+              legend:{
+                display:false,
+                position:'top'
+              }
+            }}
+          />
+          <Line
+            data={uviData}
+            options={{
+              responsive: true,
+              scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true,
+                        fontColor:'white'
+                    }
+                }],
+                xAxes: [{
+                  ticks: {
+                      beginAtZero:true,
+                      fontColor:'white'
+                  }
+              }]
+            },
+              tooltips: {
+                mode: 'index',
+                intersect: false,
+                callbacks: { 
+                  label: function(tooltipItem) {
+                    return Number(tooltipItem.yLabel) + " UV";}
+                },
+                displayColors: true,
+              },
+              title: {
+                display:true,
+                text:'Ultra Violet Index (UVI Forecast)',
                 fontSize:12,
                 fontColor: '#FFFFFF'
               },
@@ -787,28 +928,16 @@ export class ClimateMap extends Component {
         </CardContent>
         <CardActions>
         <div className='save'>
+        {this.state.data !== false ?
         <IconButton className={"upload-icon"} disabled={saveDisabled} onClick={this.addLocation}>
         <SaveAltIcon fontSize="large" />
-        </IconButton>
-      
-        {/* <Button
-          variant="contained"
-          
-          color="primary"
-          className={"upload-icon"}
-          size="large"
-          disabled={saveDisabled}
-          onClick={this.addLocation}
-          startIcon={>}
-        >
-          Save Location */}
-        {/* </Button>  */}
+        </IconButton> : null}
         </div>
         </CardActions>
         </Card>
       : null}
       {this.state.showUserLocations ?  
-       <Card variant="outlined" style={{maxHeight: 700, overflow: 'auto'}}>
+       <Card variant="outlined" style={{maxHeight: 718, overflow: 'auto'}}>
         <CardContent>
           <Typography vcolor="textSecondary" gutterBottom>
             Saved Locations
@@ -818,11 +947,6 @@ export class ClimateMap extends Component {
           <IconButton onClick={this.showStats} className="go-and-back" color="white" aria-label="next" >
         <ArrowBackIosIcon/>
         </IconButton>
-          </div>
-          <div className='next2'>
-        <IconButton color="white" aria-label="next" disabled>
-          <ArrowForwardIosIcon />
-          </IconButton>
           </div>
           <UserLocations locations={this.state.myLocations} clicked={this.goToLocation}/>
           </CardContent>

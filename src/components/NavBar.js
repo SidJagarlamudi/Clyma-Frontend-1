@@ -24,7 +24,7 @@ const NavBar = props => {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#c6ff00',
+        main: '#83ffe1',
       },
       secondary: {
         main: '#FFFFFF',

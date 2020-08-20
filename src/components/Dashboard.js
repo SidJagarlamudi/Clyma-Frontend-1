@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
       .then(resp => resp.json())
       .then(stations => {
         let y = stations.data
-        let x = stations.data.slice(0,1000)
+        let x = stations.data.slice(0,4500)
         console.log(y)
         this.props.fetchStatSuccess(x)
       })

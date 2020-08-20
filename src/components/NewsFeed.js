@@ -40,6 +40,15 @@ class NewsFeed extends React.Component {
         console.log(data)
         this.props.currentUser(data)
       })
+      fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=1&pageSize=10&q=climate%20change&safeSearch=false", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+		"x-rapidapi-key": "c5855f8358mshe884588b34ae70ep1a1627jsn5e1e97c23a80"
+	}
+})
+.then(resp => resp.json())
+.then(data => console.log(data))
       fetch('https://newsapi.org/v2/everything?q=climate%20change&apiKey=cdcfd508f0a3409cb71b20f0d5bba38e')  
       .then(resp => resp.json())
       .then(news => {

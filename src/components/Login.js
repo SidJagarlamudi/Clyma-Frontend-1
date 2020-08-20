@@ -58,6 +58,10 @@ class Login extends React.Component {
 }
 document.body.style = 'background: #424242;';
 
+// const nav = document.getElementsByClassName("menu2")
+// console.log(nav.rootE)
+// nav.style = "display: hidden;"
+
 const mapDispatchToProps = {
   loginSuccess
 }

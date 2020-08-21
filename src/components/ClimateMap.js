@@ -101,8 +101,6 @@ export class ClimateMap extends Component {
     }
   }
 
-  
-
   componentDidMount(){
     fetch('http://localhost:3001/locations')
     .then(resp => resp.json())
@@ -129,14 +127,6 @@ export class ClimateMap extends Component {
     
   }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   if (this.state.coords=== nextState.coords) {
-  //     return false;
-  //   } else {
-  //   return true;
-  //   }
-  // }
-
   mapCLicked = (mapProps, map, event) => {
     console.log(event)
   }
@@ -145,42 +135,10 @@ export class ClimateMap extends Component {
     const { latLng } = coord;
     const newLat = latLng.lat();
     const newLon = latLng.lng();
-    // this.setState({
-    //   coords: {
-    //     lat: newLat,
-    //     lng: newLon
-    //   }
-    // })
     console.log(this.state.coords)
     this._score.state.coords.lat = newLat
     this._score.state.coords.lng = newLon
     this._map.map.setCenter({lat: newLat, lng: newLon})    
-    // fetch(`https://climate-score.p.rapidapi.com/${newLat}/${newLon}`, {
-    // 	"method": "GET",
-    // 	"headers": {
-	  // 	"x-rapidapi-host": "climate-score.p.rapidapi.com",
-	  // 	"x-rapidapi-key": "c5855f8358mshe884588b34ae70ep1a1627jsn5e1e97c23a80"
-    //   }
-    // })
-    // .then(resp => resp.json())
-    // .then(data => {
-    //   console.log(data)
-    //   this.setState({
-    //     allScores: {
-    //       ClimateScore: data.ClimateScore,
-    //       DroughtScore: data.DroughtScore,
-    //       FireScore: data.FireScore,
-    //       SeaLevelScore: data.SeaLevelScore,
-    //       StormScore: data.StormScore,
-    //       TempScore: data.TempScore,
-    //     },
-    //   })
-    // })
-    // .catch(err => {
-    //   this.setState({
-    //     allScores: false,
-    //   })
-    //   console.log(err)})
     Geocode.setApiKey("AIzaSyDmc1KD6Xr80d3hduc4Q2MObw1uotQuY-8");
     Geocode.fromLatLng(newLat, newLon).then(
       response => {
@@ -240,8 +198,7 @@ export class ClimateMap extends Component {
       console.log(this.state.coords)
       Geocode.fromLatLng(lat, lng).then(
       response => {
-        // const newAddress = response.results[0].formatted_address;
-        // this._score.state.address = newAddress
+       
       
       },
       error => {
@@ -255,7 +212,6 @@ export class ClimateMap extends Component {
           data: locationData.data
         })
       })  
-      // Geocode.setApiKey("AIzaSyDmc1KD6Xr80d3hduc4Q2MObw1uotQuY-8");
     })
   }
 
@@ -770,17 +726,6 @@ export class ClimateMap extends Component {
         </Markers>
         : null}
         {!this.state.showAQI ? this.renderClimateScores() : null}
-        {/* <Marker ref={(marker)=>this._marker = marker */}
-                {/* // onClick={this.onMarkerClick}
-                // name={'Current location'} 
-                // draggable={true}
-                // hovered={this.state.hovered}
-                // onMouseover={this.mouseEnterHandler}
-                // onMouseout={this.mouseLeaveHandler}
-                // onMouseover={()=>this.markerHover()}
-                // initialCenter={this.state.coords}
-                // position={this.state.coords}
-                // onDragend={(t, map, coord) => this.onMarkerDragEnd(coord)}/> */}
         <InfoWindow
           marker={this.state.activeMarker}
           maxWidth={175}

@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { useSpring, animated } from 'react-spring'
 
 const calc = (x, y) => [x - window.innerWidth / 2, y - window.innerHeight / 2]

@@ -39,14 +39,6 @@ class Dashboard extends React.Component {
         console.log(y)
         this.props.fetchStatSuccess(x)
       })
-    //   fetch('https://public.opendatasoft.com/api/records/1.0/search/?dataset=1000-largest-us-cities-by-population-with-geographic-coordinates&q=&rows=1000&sort=-rank&facet=city&facet=state')
-    //   .then(resp => resp.json())
-    //   .then(cities => {
-    //     this.props.fetchCitiesSuccess(cities.records)
-    //   })
-    //   console.log(this.props)
-    //   console.log(this.state)
-    // }
     }
   }
 

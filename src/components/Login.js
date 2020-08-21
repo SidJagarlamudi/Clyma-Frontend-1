@@ -87,14 +87,6 @@ class Login extends React.Component {
       </div>
         : null
       }
-        {/* <form onSubmit={this.handleSubmit.bind(this)}>
-        <span className='label'>Please Sign-In!</span>
-          <input name={'username'} placeholder='username' onChange={this.handleInputChange} value={this.state.username} />
-          <input name={'password'} placeholder='password' onChange={this.handleInputChange} value={this.state.password} />
-          <input type='submit' value='login' />
-        </form> */}
-
-
         </div>
         <LoginBG/>
       </div>
@@ -102,10 +94,6 @@ class Login extends React.Component {
   }
 }
 document.body.style = 'background: #424242;';
-
-// const nav = document.getElementsByClassName("menu2")
-// console.log(nav.rootE)
-// nav.style = "display: hidden;"
 
 const mapDispatchToProps = {
   loginSuccess

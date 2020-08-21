@@ -71,7 +71,6 @@ export class UserLocations extends Component {
         </Card>
       </div>
       })
-    // return <div><h1>chill react</h1></div>
     }
   }
 

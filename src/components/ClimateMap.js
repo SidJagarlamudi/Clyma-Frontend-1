@@ -717,8 +717,6 @@ export class ClimateMap extends Component {
         </div>
         {this.state.showAQI ? 
         <Markers 
-                // onMouseover={this.onMarkerHover}
-                // onMouseout={this.mouseOut}
                 onClick={this.onMarkerClick}
                 onMouseover={this.mouseEnterHandler}
                 onMouseout={this.mouseLeaveHandler}

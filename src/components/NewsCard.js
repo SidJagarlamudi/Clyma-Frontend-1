@@ -4,18 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import ChevronRightRounded from '@material-ui/icons/ChevronRightRounded';
 import TextInfoContent from '@mui-treasury/components/content/textInfo';
-import { useWideCardMediaStyles } from '@mui-treasury/styles/cardMedia/wide';
-import { useN01TextInfoContentStyles } from '@mui-treasury/styles/textInfoContent/n01';
 import { useBouncyShadowStyles } from '@mui-treasury/styles/shadow/bouncy';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Iframe from 'react-iframe'
 import { useState, useEffect } from 'react';
-import { palette } from '@material-ui/system';
 
 
 function useWindowSize() {
@@ -119,7 +114,6 @@ export function NewsCard(props) {
         className='news-img'
         image={props.article.urlToImage}
       />
-       
       <CardContent >
         <TextInfoContent 
           classes={textStyles}
@@ -127,10 +121,6 @@ export function NewsCard(props) {
           heading={props.article.title}
           body={props.article.description}
         />
-        
-        {/* <Button color={'primary'} fullWidth className={styles.cta} onClick={handleOpen}>
-          Find Out More <ChevronRightRounded />
-        </Button> */}
         <div>
       <button onClick={handleOpen} class="button  arrow">Read more</button>
       </div>

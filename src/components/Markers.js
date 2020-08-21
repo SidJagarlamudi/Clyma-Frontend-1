@@ -17,11 +17,7 @@ class MyMarkers extends PureComponent {
           info={statObj}
           position={{lat: statObj.lat, lng: statObj.lon}}
           // onClick={this.props.onMarkerClick}
-          // onMouseover={this.props.onMarkerHover}
-          // onMouseout={this.props.mouseOut}
           id={statObj.uid}
-          // ref={accordionContent => this.props.accordionContent[key] = accordionContent}
-
           onMouseover={this.props.mouseEnterHandler}
           onMouseout={this.props.mouseLeaveHandler}
           {...this.props}

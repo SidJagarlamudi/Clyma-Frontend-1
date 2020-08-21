@@ -24,10 +24,6 @@ export default class Loading extends React.Component {
     }, 1500);
   }
 
-  // componentDidUpdate(){
-  //   unmountComponentAtNode(document.getElementById('loader'))
-  // }
-
   renderLoadingGIF = () => {
     return <div>
       <img src={loadingGIF} alt='-'></img>
@@ -41,12 +37,9 @@ export default class Loading extends React.Component {
           <FadeIn>
             <div className="d-flex justify-content-center align-items-center">
               {!this.state.loading ? (
-                // <Lottie options={defaultOptions} height={700} width={9000} />
-              // ) : (
                 this.renderLoadingGIF()
               ):( 
                 null
-              //   <Lottie options={defaultOptions2} height={700} width={900} />
               )}
             </div>
           </FadeIn>

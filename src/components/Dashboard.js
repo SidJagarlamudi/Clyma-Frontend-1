@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
         .then((stations) => {
           let y = stations.data;
           let x = stations.data.slice(0, 4500);
-          this.props.fetchStatSuccess(x);
+          this.props.fetchStatSuccess(y);
         });
     // }
   }

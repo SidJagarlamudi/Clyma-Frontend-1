@@ -23,32 +23,23 @@ class NewsFeed extends React.Component {
   }
   
   componentDidMount(){
-    // const token = localStorage.getItem('token')
-    // console.log(token)
-    // if (!token) {
-    //   this.props.history.push('/login')
-    // } else {
-    //   const reqObj = {
-    //     method: 'GET',
-    //     headers: {
-    //       'Authorization': `Bearer ${token}`
-    //     }
-    //   }
-    //   fetch('http://localhost:3001/current_user', reqObj)
-    //   .then(resp => resp.json())
-    //   .then(data => {
-    //     console.log(data)
-    //     this.props.currentUser(data)
-    //   })
-      fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=1&pageSize=10&q=climate%20change&safeSearch=false", {
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-		"x-rapidapi-key": "c5855f8358mshe884588b34ae70ep1a1627jsn5e1e97c23a80"
-	}
-})
-.then(resp => resp.json())
-.then(data => console.log(data))
+    const token = localStorage.getItem('token')
+    console.log(token)
+    if (!token) {
+      this.props.history.push('/login')
+    } else {
+      const reqObj = {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      }
+      fetch('https://myclimate.herokuapp.com/current_user', reqObj)
+      .then(resp => resp.json())
+      .then(data => {
+        console.log(data)
+        this.props.currentUser(data)
+      })
       fetch('https://newsapi.org/v2/everything?q=climate%20change&apiKey=cdcfd508f0a3409cb71b20f0d5bba38e')  
       .then(resp => resp.json())
       .then(news => {
@@ -57,7 +48,7 @@ class NewsFeed extends React.Component {
           newsArticles: news.articles
         })
       })
-    // }
+    }
   }
 
   renderFirst3rd = () => {

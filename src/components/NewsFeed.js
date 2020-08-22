@@ -23,23 +23,23 @@ class NewsFeed extends React.Component {
   }
   
   componentDidMount(){
-    const token = localStorage.getItem('token')
-    console.log(token)
-    if (!token) {
-      this.props.history.push('/login')
-    } else {
-      const reqObj = {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      }
-      fetch('http://localhost:3001/current_user', reqObj)
-      .then(resp => resp.json())
-      .then(data => {
-        console.log(data)
-        this.props.currentUser(data)
-      })
+    // const token = localStorage.getItem('token')
+    // console.log(token)
+    // if (!token) {
+    //   this.props.history.push('/login')
+    // } else {
+    //   const reqObj = {
+    //     method: 'GET',
+    //     headers: {
+    //       'Authorization': `Bearer ${token}`
+    //     }
+    //   }
+    //   fetch('http://localhost:3001/current_user', reqObj)
+    //   .then(resp => resp.json())
+    //   .then(data => {
+    //     console.log(data)
+    //     this.props.currentUser(data)
+    //   })
       fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=1&pageSize=10&q=climate%20change&safeSearch=false", {
 	"method": "GET",
 	"headers": {
@@ -57,7 +57,7 @@ class NewsFeed extends React.Component {
           newsArticles: news.articles
         })
       })
-    }
+    // }
   }
 
   renderFirst3rd = () => {

@@ -17,7 +17,7 @@ export class UserLocations extends Component {
   }
 
   componentDidMount(){
-    fetch('http://localhost:3001/locations')
+    fetch('https://myclimate.herokuapp.com/locations')
     .then(resp => resp.json())
     .then(locations => {
       console.log(this.props)
@@ -36,7 +36,7 @@ export class UserLocations extends Component {
         'Content-Type':  'application/json',
       }
     }
-    fetch(`http://localhost:3001/locations/${id}`, reqObj)
+    fetch(`https://myclimate.herokuapp.com/locations/${id}`, reqObj)
     .then(resp => resp.json())
     .then(data => {
       console.log(data)

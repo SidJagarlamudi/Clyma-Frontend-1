@@ -299,7 +299,7 @@ export class ClimateMap extends Component {
         },
         body: JSON.stringify(newLocation),
       };
-      fetch("http://localhost:3001/locations", reqObj)
+      fetch("https://myclimate.herokuapp.com/locations", reqObj)
         .then((resp) => resp.json())
         .then((newLocation) => {
           this.props.createLocationSuccess(newLocation);

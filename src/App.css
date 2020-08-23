@@ -265,10 +265,6 @@ z-index: 20;
 color: #83ffe1
 }
 
-/* .news-img {
-  height: 200px;
-} */
-
 .card1,
 .card2,
 .card3,
@@ -524,6 +520,7 @@ div.signup-container{
   text-align: center;
   border: 1px solid #4A4A4A;
   padding: 30px;
+  background-color: #4A4A4A;
 }
 
 label {

@@ -9,6 +9,8 @@ class Login extends React.Component {
     this.state = {
       username: '',
       password: '',
+      pw: '',
+      email: '',
       showSignUp: false
     }
   }
@@ -45,6 +47,17 @@ class Login extends React.Component {
     })
   }
 
+  handleFormSubmit = (event) => {
+    event.preventDefault()
+    console.log('working!')
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
   render(){
     return (
       <div>
@@ -52,17 +65,17 @@ class Login extends React.Component {
         {this.state.showSignUp ? 
       <div class="signup-container">
     <section>
-      <form class='signup-form'>
+      <form onSubmit={this.handleFormSubmit} class='signup-form'>
         <label>
-          <input name="name" id="name" type="text" required />
-          <div class="label-text">Full Name</div>
-        </label>
-        <label>
-          <input type="email" name="email" id="email" required />
+          <input onChange={this.handleChange} name="email" id="email" type="email" required />
           <div class="label-text">Email</div>
         </label>
         <label>
-          <input type="tel" name="pw" id="pw" required />
+          <input onChange={this.handleChange} type="username" name="username" id="username" required />
+          <div class="label-text">Username</div>
+        </label>
+        <label>
+          <input onChange={this.handleChange} type="pw" name="pw" id="pw" required />
           <div class="label-text">Password</div>
         </label>
         <br></br>

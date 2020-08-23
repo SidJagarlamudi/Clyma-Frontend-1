@@ -177,14 +177,14 @@ Project Link: [https://github.com/johnloberger/MyClimate-Frontend](https://githu
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[forks-shield]: https://img.shields.io/github/forks/MyClimate-Frontend.svg?style=flat-square
+[forks-shield]: https://img.shields.io/github/forks/johnloberger/MyClimate-Frontend.svg?style=flat-square
 [forks-url]: https://github.com/johnloberger/MyClimate-Frontend/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/MyClimate-Frontend/stargazers
-[issues-shield]: https://img.shields.io/github/issues/MyClimate-Frontend.svg?style=flat-square
-[issues-url]: https://github.com/MyClimate-Frontend/issues
-[license-shield]: https://img.shields.io/github/license/MyClimate-Frontend.svg?style=flat-square
-[license-url]: https://github.com/MyClimate-Frontend/blob/master/LICENSE.txt
+[stars-shield]: https://img.shields.io/github/stars/johnloberger/MyClimate-Frontend.svg?style=flat-square
+[stars-url]: https://github.com/johnloberger/MyClimate-Frontend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/johnloberger/MyClimate-Frontend.svg?style=flat-square
+[issues-url]: https://github.com/johnloberger/MyClimate-Frontend/issues
+[license-shield]: https://img.shields.io/github/license/johnloberger/MyClimate-Frontend.svg?style=flat-square
+[license-url]: https://github.com/johnloberger/MyClimate-Frontend/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/johnloberger
 

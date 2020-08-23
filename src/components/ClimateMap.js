@@ -796,7 +796,8 @@ export class ClimateMap extends Component {
                 {this.state.activeCSMarker ? (
                   <Card
                     variant="outlined"
-                    style={{ maxHeight: 718, overflow: "auto" }}
+                    className={'detail-card'}
+                    style={{ overflow: "auto" }}
                   >
                     <CardContent>
                       <Typography
@@ -909,8 +910,9 @@ export class ClimateMap extends Component {
                 ) : null}
                 {!this.state.showUserLocations && this.state.showAQI ? (
                   <Card
+                    className={'detail-card'}
                     variant="outlined"
-                    style={{ maxHeight: 718, overflow: "auto" }}
+                    style={{ overflow: "auto" }}
                   >
                     <CardContent>
                       <div className="next2">
@@ -1171,8 +1173,9 @@ export class ClimateMap extends Component {
                 ) : null}
                 {this.state.showUserLocations ? (
                   <Card
+                    className='detail-card'
                     variant="outlined"
-                    style={{ maxHeight: 718, overflow: "auto" }}
+                    style={{ overflow: "auto" }}
                   >
                     <CardContent>
                       <Typography vcolor="textSecondary" gutterBottom>

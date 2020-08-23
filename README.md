@@ -183,8 +183,8 @@ Project Link: [https://github.com/johnloberger/MyClimate-Frontend](https://githu
 [stars-url]: https://github.com/johnloberger/MyClimate-Frontend/stargazers
 [issues-shield]: https://img.shields.io/github/issues/johnloberger/MyClimate-Frontend.svg?style=flat-square
 [issues-url]: https://github.com/johnloberger/MyClimate-Frontend/issues
-[license-shield]: https://img.shields.io/github/license/johnloberger/MyClimate-Frontend.svg?style=flat-square
+[license-shield]: https://img.shields.io/badge/License-MIT-green.svg
 [license-url]: https://github.com/johnloberger/MyClimate-Frontend/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/johnloberger
-
+[product-screenshot]: https://i.imgur.com/9DtnaKz.png

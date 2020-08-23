@@ -1,11 +1,4 @@
 <!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
@@ -18,7 +11,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/johnloberger/MyClimate-Frontend">
-    <img src="https://media.giphy.com/media/VI2UC13hwWin1MIfmi/giphy.gif" alt="Logo" width="80" height="80">
+    <img src="https://media.giphy.com/media/VI2UC13hwWin1MIfmi/giphy.gif" alt="Logo">
   </a>
 
   <h3 align="center">Welcome to MyClimate!</h3>
@@ -27,7 +20,7 @@
     This React front-end, Ruby on Rails back-end web application is designed to allow individuals to view real-time data pertaining to air quality index and ClimateScore. 
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">🖥️ LIVE Demo!</a>
+    <a href="https://myclimate.netlify.app/login">🖥️ LIVE Demo!</a>
     ·
     <a href="https://github.com/johnloberger/MyClimate-Frontend/issues">Report Bug</a>
     ·
@@ -57,12 +50,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://i.imgur.com/9DtnaKz.png)
 
-If you didn't know, our planet is changing. In many ways, our planet is improving positively, however, this is not true for every ascept surrounding this floating rock we call home. I wanted to create an application to visualize air pollution across the globe and spread awareness to the impending doom which is climate change.
+If you didn't know, our planet is changing. In many ways, our planet is improving positively, however, this is not true for every aspect surrounding this floating rock we call home. I wanted to create an application to visualize air pollution across the globe and spread awareness to the impending doom which is climate change.
 
 Here's why:
-* I was extremely curious in experimenting which API technologies such as Google Maps and the World Air Quality Index API
+* I was extremely curious in experimenting with API technologies such as Google Maps and the World Air Quality Index API
 * I am a passionate humanitarian who values all human life, which is currently being threatened by globally increasing temperatures
 * If only 1% of my network stumbles upon this web application and feels compelled to contribute to any climate change fund then I will have made a difference no matter how futile
 
@@ -92,7 +85,7 @@ To setup and run this project locally, please complete the following instruction
 
 ### Prerequisites
 
-You should know how basic React apps and RoR APIs are setup.
+You should know how to setup basic React apps and RoR APIs.
 
 ### Installation
 
@@ -183,17 +176,15 @@ Project Link: [https://github.com/johnloberger/MyClimate-Frontend](https://githu
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+
+[forks-shield]: https://img.shields.io/github/forks/MyClimate-Frontend.svg?style=flat-square
+[forks-url]: https://github.com/johnloberger/MyClimate-Frontend/network/members
 [stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[stars-url]: https://github.com/MyClimate-Frontend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/MyClimate-Frontend.svg?style=flat-square
+[issues-url]: https://github.com/MyClimate-Frontend/issues
+[license-shield]: https://img.shields.io/github/license/MyClimate-Frontend.svg?style=flat-square
+[license-url]: https://github.com/MyClimate-Frontend/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/johnloberger
-[product-screenshot]: images/screenshot.png
 

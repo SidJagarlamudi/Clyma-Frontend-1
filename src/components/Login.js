@@ -50,7 +50,24 @@ class Login extends React.Component {
 
   handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log("working!");
+    const newUser = {email: this.state.email, username: this.state.username, password: this.state.pw}
+    console.log(newUser)
+    const reqObj = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newUser)
+    }
+    fetch('https://myclimate.herokuapp.com/users', reqObj)
+    .then(newUser => {
+      this.setState({
+        email: '',
+        username: '',
+        pw: '',
+      })
+      this.props.history.push("/login");
+    })
   };
 
   handleChange = (event) => {

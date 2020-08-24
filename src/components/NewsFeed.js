@@ -106,8 +106,9 @@ class NewsFeed extends React.Component {
 
   render(){ 
       return (
-        <div style={{backgroundColor: '#424242'}}>
-        <FormControl>
+        <div style={{backgroundColor: '#424242', color: '#FFFFFF'}}>
+          <h2>Unfortunately the News API ‘production plan’ is too expensive for me to include it on this production app. However, an alternative news API source is coming very soon! </h2>
+        {/* <FormControl>
         <InputLabel style={{color:'white'}} htmlFor="grouped-native-select">Filter By:</InputLabel>
         <Select style={{color:'white'}} native defaultValue="" id="grouped-native-select" onChange={this.handleSelect}>
           <option aria-label="None" value="" />
@@ -136,7 +137,7 @@ class NewsFeed extends React.Component {
             </Grid>
 
 
-          </Grid>
+          </Grid> */}
         </div>)
   };
 }

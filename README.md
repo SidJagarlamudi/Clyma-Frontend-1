@@ -20,7 +20,7 @@
     This React front-end, Ruby on Rails back-end web application is designed to allow individuals to view real-time data pertaining to air quality index and ClimateScore. 
     <br />
     <br />
-    <a href="https://myclimate.netlify.app/login">🖥️ LIVE Demo!</a>
+    <a href="https://clyma.netlify.app/login">🖥️ LIVE Demo!</a>
     ·
     <a href="https://github.com/johnloberger/Clyma-Frontend/issues">Report Bug</a>
     ·
@@ -91,11 +91,11 @@ You should know how to setup basic React apps and RoR APIs.
 
 1. Clone the 'Frontend' repo
 ```sh
-git clone https://github.com/johnloberger/MyClimate-Frontend.git
+git clone https://github.com/johnloberger/Clyma-Frontend.git
 ```
 2. Clone the 'Backend' repo
 ```sh
-git clone https://github.com/johnloberger/MyClimate-Backend.git
+git clone https://github.com/johnloberger/Clyma-Backend.git
 ```
 3. Install packages on the back-end directory
 ```sh

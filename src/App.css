@@ -619,3 +619,10 @@ label input:valid + .label-text {
   background-color: white;
   color: #333333;
 }
+
+.lp-logo{
+  position: absolute;
+  top: 20em;
+  left: 10%;
+  z-index: 5;
+}

@@ -2,18 +2,21 @@ import React from 'react';
 import '../App.css';
 import NavBar from './NavBar';
 import { Route, Redirect, BrowserRouter } from 'react-router-dom';
+import LandingPage from './LandingPage'
+
 
 
 function App() {
   // const match = useRouteMatch()
   // const location = useLocation()
-
+ 
+  
   return (
-    
     <BrowserRouter forceRefresh={true}>
     <div className="App">
     {/* <Redirect exact from="/home" to="/home/about" /> */}
     <Route exact path="/:page?" render={props => <NavBar {...props} />} />
+    <Route path='/' exact component={ LandingPage }/>
     {/* <Route
           path="/"
           render={({ location }) => (

@@ -14,7 +14,6 @@ import { useHistory } from "react-router";
 import Clymanew from "../images/Clymanew.png"
 
 const NavBar = (props) => {
-  const history2 = useHistory();
   const { match, history } = props;
   const { params } = match;
   const { page } = params;
@@ -57,6 +56,10 @@ const NavBar = (props) => {
     history.push("/login");
   };
 
+  const logoClick = () => {
+    history.push("/");
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
@@ -69,7 +72,7 @@ const NavBar = (props) => {
             <Tab label="Home" className={"menu-tab"} />
             <Tab label="News" className={"menu-tab"} />
             <div class='nav-logo'>
-            <img style={{height: '30px', width: '100px', top: '.65em', position: 'relative'}}src={Clymanew} alt='logo' ></img>
+            <img onClick={logoClick} style={{height: '30px', width: '100px', top: '.65em', position: 'relative'}}src={Clymanew} alt='logo' ></img>
             </div>
             {props.auth ? (
               <div className={"menu-logout-tab"}>
@@ -92,6 +95,7 @@ const NavBar = (props) => {
       {selectedTab === 2 && (
         <Login style={{ backgroundColor: "#303030" }} {...props} />
       )}
+
     </ThemeProvider>
   );
 };

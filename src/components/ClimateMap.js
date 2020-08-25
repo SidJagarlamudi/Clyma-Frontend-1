@@ -1151,8 +1151,8 @@ export class ClimateMap extends Component {
                         </div>
                       ) : (
                         <div>
-                          <h1>Welcome to MyClimate.</h1>
-                          <h2>Click a location for details.</h2>
+                          <h1>Welcome!</h1>
+                          <h2>To use this app, click any pin on the map to view detailed information about that location.</h2>
                         </div>
                       )}
                     </CardContent>

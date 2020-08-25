@@ -20,7 +20,7 @@
     This React front-end, Ruby on Rails back-end web application is designed to allow individuals to view real-time data pertaining to air quality index and ClimateScore. 
     <br />
     <br />
-    <a href="https://clyma.netlify.app/login">🖥️ LIVE Demo!</a>
+    <a href="https://clyma.netlify.app">🖥️ LIVE Demo!</a>
     ·
     <a href="https://github.com/johnloberger/Clyma-Frontend/issues">Report Bug</a>
     ·

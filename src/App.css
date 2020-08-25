@@ -249,6 +249,18 @@
   transition: all 0.2s ease-in-out;
 }
 
+.nav-logo {
+  position: relative;
+  left: -5%;
+  margin-left: auto;
+  transition: all 0.1s ease-in-out;
+  /* margin-right: auto; */
+}
+
+.nav-logo:hover {
+  transform: scale(1.08);
+}
+
 .location-card:hover {
   transform: scale(1.08);
   transition: all 0.1s ease-in-out;

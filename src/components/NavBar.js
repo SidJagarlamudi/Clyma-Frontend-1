@@ -11,6 +11,7 @@ import { logoutUser } from "../actions/auth";
 import { connect } from "react-redux";
 import NewsFeed from "./NewsFeed";
 import { useHistory } from "react-router";
+import Clymanew from "../images/Clymanew.png"
 
 const NavBar = (props) => {
   const history2 = useHistory();
@@ -67,6 +68,9 @@ const NavBar = (props) => {
           >
             <Tab label="Home" className={"menu-tab"} />
             <Tab label="News" className={"menu-tab"} />
+            <div class='nav-logo'>
+            <img style={{height: '30px', width: '100px', top: '.65em', position: 'relative'}}src={Clymanew} alt='logo' ></img>
+            </div>
             {props.auth ? (
               <div className={"menu-logout-tab"}>
                 <Tab

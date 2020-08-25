@@ -12,6 +12,7 @@ class Login extends React.Component {
       pw: "",
       email: "",
       showSignUp: false,
+      showLoading: false
     };
   }
 
@@ -65,6 +66,7 @@ class Login extends React.Component {
         email: '',
         username: '',
         pw: '',
+        showLoading: true
       })
       this.props.history.push("/login");
     })
@@ -160,6 +162,7 @@ class Login extends React.Component {
             </div>
           ) : null}
         </div>
+        {this.state.showLoading ? <img src='https://media1.giphy.com/media/SUuSRBp7BBjUOEf5Kg/giphy.gif' alt='loading'></img>:null}
         <LoginBG />
       </div>
     );

@@ -10,21 +10,21 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/johnloberger/MyClimate-Frontend">
+  <a href="https://github.com/johnloberger/Clyma-Frontend">
     <img src="https://media.giphy.com/media/VI2UC13hwWin1MIfmi/giphy.gif" alt="Logo">
   </a>
 
-  <h3 align="center">Welcome to MyClimate!</h3>
+  <h3 align="center">Welcome to Clyma!</h3>
 
   <p align="center">
     This React front-end, Ruby on Rails back-end web application is designed to allow individuals to view real-time data pertaining to air quality index and ClimateScore. 
     <br />
     <br />
-    <a href="https://myclimate.netlify.app/login">🖥️ LIVE Demo!</a>
+    <a href="https://clyma.netlify.app">🖥️ LIVE Demo!</a>
     ·
-    <a href="https://github.com/johnloberger/MyClimate-Frontend/issues">Report Bug</a>
+    <a href="https://github.com/johnloberger/Clyma-Frontend/issues">Report Bug</a>
     ·
-    <a href="https://github.com/johnloberger/MyClimate-Frontend/issues">Request Feature</a>
+    <a href="https://github.com/johnloberger/Clyma-Frontend/issues">Request Feature</a>
   </p>
 </p>
 
@@ -91,11 +91,11 @@ You should know how to setup basic React apps and RoR APIs.
 
 1. Clone the 'Frontend' repo
 ```sh
-git clone https://github.com/johnloberger/MyClimate-Frontend.git
+git clone https://github.com/johnloberger/Clyma-Frontend.git
 ```
 2. Clone the 'Backend' repo
 ```sh
-git clone https://github.com/johnloberger/MyClimate-Backend.git
+git clone https://github.com/johnloberger/Clyma-Backend.git
 ```
 3. Install packages on the back-end directory
 ```sh
@@ -134,7 +134,7 @@ To use this application, simply explore the Google Map and hover/click on any ma
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/johnloberger/MyClimate-Frontend/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/johnloberger/Clyma-Frontend/issues) for a list of proposed features (and known issues).
 
 
 
@@ -163,7 +163,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 John Loberger - [My Website](http://jloberger.com) - johnloberger@gmail.com
 
-Project Link: [https://github.com/johnloberger/MyClimate-Frontend](https://github.com/johnloberger/MyClimate-Frontend)
+Project Link: [https://github.com/johnloberger/Clyma-Frontend](https://github.com/johnloberger/Clyma-Frontend)
 
 
 
@@ -177,14 +177,14 @@ Project Link: [https://github.com/johnloberger/MyClimate-Frontend](https://githu
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[forks-shield]: https://img.shields.io/github/forks/johnloberger/MyClimate-Frontend.svg?style=flat-square
-[forks-url]: https://github.com/johnloberger/MyClimate-Frontend/network/members
-[stars-shield]: https://img.shields.io/github/stars/johnloberger/MyClimate-Frontend.svg?style=flat-square
-[stars-url]: https://github.com/johnloberger/MyClimate-Frontend/stargazers
-[issues-shield]: https://img.shields.io/github/issues/johnloberger/MyClimate-Frontend.svg?style=flat-square
-[issues-url]: https://github.com/johnloberger/MyClimate-Frontend/issues
+[forks-shield]: https://img.shields.io/github/forks/johnloberger/Clyma-Frontend.svg?style=flat-square
+[forks-url]: https://github.com/johnloberger/Clyma-Frontend/network/members
+[stars-shield]: https://img.shields.io/github/stars/johnloberger/Clyma-Frontend.svg?style=flat-square
+[stars-url]: https://github.com/johnloberger/Clyma-Frontend/stargazers
+[issues-shield]: https://img.shields.io/github/issues/johnloberger/Clyma-Frontend.svg?style=flat-square
+[issues-url]: https://github.com/johnloberger/Clyma-Frontend/issues
 [license-shield]: https://img.shields.io/badge/License-MIT-green.svg
-[license-url]: https://github.com/johnloberger/MyClimate-Frontend/blob/master/LICENSE.txt
+[license-url]: https://github.com/johnloberger/Clyma-Frontend/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/johnloberger
 [product-screenshot]: https://i.imgur.com/9DtnaKz.png

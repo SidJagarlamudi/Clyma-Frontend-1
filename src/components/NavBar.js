@@ -1,20 +1,18 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Dashboard from './Dashboard'
-import Login from './Login'
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import { logoutUser } from '../actions/auth'
-import { connect } from 'react-redux'
-import NewsFeed from './NewsFeed';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import AppBar from "@material-ui/core/AppBar";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Dashboard from "./Dashboard";
+import Login from "./Login";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import { logoutUser } from "../actions/auth";
+import { connect } from "react-redux";
+import NewsFeed from "./NewsFeed";
 import { useHistory } from "react-router";
 
-
-
-const NavBar = props => {
+const NavBar = (props) => {
   const history2 = useHistory();
   const { match, history } = props;
   const { params } = match;
@@ -23,19 +21,19 @@ const NavBar = props => {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: '#83ffe1',
+        main: "#83ffe1",
       },
       secondary: {
-        main: '#FFFFFF',
+        main: "#FFFFFF",
       },
     },
   });
 
   const tabNameToIndex = {
     0: "home",
-    1: 'news',
+    1: "news",
     2: "login",
-  }
+  };
   const indexToTabName = {
     home: 0,
     news: 1,
@@ -50,47 +48,54 @@ const NavBar = props => {
   };
 
   const handleLogout = () => {
-    history.push('/login')
-    localStorage.removeItem('token')
-  
-  }
+    history.push("/login");
+    localStorage.removeItem("token");
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
-        <div className='menu2'>
-        <Tabs value={selectedTab} onChange={handleChange} indicatorColor="primary">
-          <Tab label="Home" className={"menu-tab"}/>
-          <Tab label="News" className={"menu-tab"}/>
-          { 
-          props.auth ?
-          <div className={"menu-logout-tab"}>
-          <Tab label="Logout" onClick={handleLogout} className={"menu-tab"}/>
-          </div>
-          :
-          <div className={"menu-login-tab"}>
-
-            <Tab label="Login" />
-          </div>
-        }
-        </Tabs>
+        <div className="menu2">
+          <Tabs
+            value={selectedTab}
+            onChange={handleChange}
+            indicatorColor="primary"
+          >
+            <Tab label="Home" className={"menu-tab"} />
+            <Tab label="News" className={"menu-tab"} />
+            {props.auth ? (
+              <div className={"menu-logout-tab"}>
+                <Tab
+                  label="Logout"
+                  onClick={handleLogout}
+                  className={"menu-tab"}
+                />
+              </div>
+            ) : (
+              <div className={"menu-login-tab"}>
+                <Tab label="Login" />
+              </div>
+            )}
+          </Tabs>
         </div>
       </AppBar>
-      {selectedTab === 0 && <Dashboard {...props}/>}
-      {selectedTab === 1 && <NewsFeed {...props}/>}
-      {selectedTab === 2 && <Login style={{backgroundColor: '#303030'}}{...props}/>}
-      </ThemeProvider>
+      {selectedTab === 0 && <Dashboard {...props} />}
+      {selectedTab === 1 && <NewsFeed {...props} />}
+      {selectedTab === 2 && (
+        <Login style={{ backgroundColor: "#303030" }} {...props} />
+      )}
+    </ThemeProvider>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.auth
-  }
-}
+    auth: state.auth,
+  };
+};
 
 const mapDispatchToProps = {
-  logoutUser
-}
+  logoutUser,
+};
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBar));

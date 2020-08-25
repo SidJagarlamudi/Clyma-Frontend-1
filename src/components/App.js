@@ -1,15 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import '../App.css';
 import NavBar from './NavBar';
-import { Route, Switch, useRouteMatch, useLocation } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
-import Dashboard from './Dashboard';
-import Loading from "./loading.js"
-import Login from './Login';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import { Link } from 'react-router-dom';
+import { Route, Redirect, BrowserRouter } from 'react-router-dom';
 
 
 function App() {

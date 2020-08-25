@@ -52,6 +52,10 @@ const NavBar = (props) => {
     localStorage.removeItem("token");
   };
 
+  const loginClicked = () => {
+    history.push("/login");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <AppBar position="static">
@@ -73,7 +77,7 @@ const NavBar = (props) => {
               </div>
             ) : (
               <div className={"menu-login-tab"}>
-                <Tab label="Login" />
+                <Tab onClick={loginClicked} label="Login" />
               </div>
             )}
           </Tabs>

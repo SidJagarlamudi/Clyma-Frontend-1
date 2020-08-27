@@ -33,7 +33,7 @@ class LandingPage extends React.Component {
 	        },
 	        "move": {
 	            "direction": "right",
-	            "speed": 0.05
+	            "speed": 0.10
 	        },
 	        "size": {
 	            "value": 1

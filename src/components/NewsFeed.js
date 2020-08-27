@@ -40,12 +40,18 @@ class NewsFeed extends React.Component {
         console.log(data)
         this.props.currentUser(data)
       })
-      fetch('https://newsapi.org/v2/everything?q=climate%20change&apiKey=cdcfd508f0a3409cb71b20f0d5bba38e')  
+      fetch("https://bing-news-search1.p.rapidapi.com/news/search?count=20&freshness=Day&textFormat=Raw&safeSearch=Off&q=climate%20change", {
+        "method": "GET",
+        "headers": {
+          "x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
+          "x-rapidapi-key": "c5855f8358mshe884588b34ae70ep1a1627jsn5e1e97c23a80",
+          "x-bingapis-sdk": "true"
+        }
+      })
       .then(resp => resp.json())
       .then(news => {
-        console.log(news.articles)
         this.setState({
-          newsArticles: news.articles
+          newsArticles: news.value
         })
       })
     }
@@ -107,8 +113,8 @@ class NewsFeed extends React.Component {
   render(){ 
       return (
         <div style={{backgroundColor: '#424242', color: '#FFFFFF'}}>
-          <h2>Unfortunately the News API ‘production plan’ is too expensive for me to include it on this production app. However, an alternative news API source is coming very soon! </h2>
-        {/* <FormControl>
+          {/* <h2>Unfortunately the News API ‘production plan’ is too expensive for me to include it on this production app. However, an alternative news API source is coming very soon! </h2> */}
+        <FormControl>
         <InputLabel style={{color:'white'}} htmlFor="grouped-native-select">Filter By:</InputLabel>
         <Select style={{color:'white'}} native defaultValue="" id="grouped-native-select" onChange={this.handleSelect}>
           <option aria-label="None" value="" />
@@ -137,7 +143,7 @@ class NewsFeed extends React.Component {
             </Grid>
 
 
-          </Grid> */}
+          </Grid>
         </div>)
   };
 }

@@ -106,18 +106,18 @@ export function NewsCard(props) {
         style={{ height: `${randomImgHeight}px` }}
         // classes={mediaStyles}
         className="news-img"
-        image={props.article.urlToImage}
+        image={props.article.image.thumbnail.contentUrl}
       />
       <CardContent>
         <TextInfoContent
           classes={textStyles}
           overline={
             "published on: " +
-            props.article.publishedAt.substring(0, 10) +
+            props.article.datePublished.substring(0, 10) +
             ", by: " +
-            props.article.source.name
+            props.article.provider[0].name
           }
-          heading={props.article.title}
+          heading={props.article.name}
           body={props.article.description}
         />
         <div>
@@ -140,13 +140,13 @@ export function NewsCard(props) {
           <Fade in={open}>
             <div className={modalStyles.paper}>
               <a href={props.article.url} id="transition-modal-title">
-                {props.article.title}{" "}
+                {props.article.name}{" "}
               </a>
               <p class="pub-date">
                 {"published on: " +
-                  props.article.publishedAt.substring(0, 10) +
+                  props.article.datePublished.substring(0, 10) +
                   ", by: " +
-                  props.article.source.name}
+                  props.article.provider[0].name}
               </p>
               <p id="transition-modal-description">
                 <Iframe

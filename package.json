@@ -37,6 +37,7 @@
     "react-loading": "^2.0.3",
     "react-lottie": "^1.2.3",
     "react-navigator-geolocation": "^1.0.8",
+    "react-particles-js": "^3.3.0",
     "react-places-autocomplete": "^7.3.0",
     "react-redux": "^7.2.1",
     "react-reveal": "^1.2.2",

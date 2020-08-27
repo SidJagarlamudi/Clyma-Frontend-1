@@ -29,7 +29,7 @@ class LandingPage extends React.Component {
 	        },
 	        "line_linked": {
 	            "enable": true,
-	            "opacity": 0.02
+	            "opacity": 0.1
 	        },
 	        "move": {
 	            "direction": "right",
@@ -48,6 +48,10 @@ class LandingPage extends React.Component {
 	    },
 	    "interactivity": {
 	        "events": {
+            "onhover": {
+              "enable": true,
+              "mode": "connect"
+          },
 	            "onclick": {
 	                "enable": true,
 	                "mode": "push"
@@ -56,8 +60,11 @@ class LandingPage extends React.Component {
 	        "modes": {
 	            "push": {
 	                "particles_nb": 1
-	            }
-	        }
+              },
+              "connect": {
+                'opacity': 5,
+            }
+          }
 	    },
 	    "retina_detect": true
 	}} /></div>

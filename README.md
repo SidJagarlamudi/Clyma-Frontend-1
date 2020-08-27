@@ -74,6 +74,7 @@ Below are all of the technologies, libraries, and packages I used to create this
 * [Google Geocoding](https://developers.google.com/maps/documentation/geocoding/overview)
 * [Google Places Autocomplete](https://developers.google.com/places/web-service/autocomplete)
 * [World Air Quality Index API](https://aqicn.org/api/)
+* [Contextual Web API](https://contextualweb.io/)
 * [Climate Score™ API](https://rapidapi.com/sameckhouse/api/climate-score)
 
 
@@ -161,7 +162,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-John Loberger - [My Website](http://jloberger.com) - johnloberger@gmail.com
+John Loberger - [My Website](https://jloberger.com) - johnloberger@gmail.com
 
 Project Link: [https://github.com/johnloberger/Clyma-Frontend](https://github.com/johnloberger/Clyma-Frontend)
 

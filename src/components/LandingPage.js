@@ -67,7 +67,8 @@ class LandingPage extends React.Component {
           }
 	    },
 	    "retina_detect": true
-	}} /></div>
+	}} />
+    </div>
     <img src='https://www.tmrow.com/static/5c33e6e4f32b13a7a70c2a4612f31647/097fa/climatestage-background1.jpg' alt='bg'></img>
     </div>
   }

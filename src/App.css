@@ -91,6 +91,8 @@
 
 .nav {
   background-color: #424242;
+  /* position: absolute;
+  z-index: 3; */
 }
 
 .next {
@@ -421,6 +423,7 @@
 #transition-modal-title {
   color: white;
   font-size: x-large;
+  
 }
 
 #transition-modal-title:hover {
@@ -431,6 +434,10 @@
 
 .news-text {
   background-color: #282c34;
+}
+
+.news-img {
+  max-height: inherit;
 }
 
 .pub-date {
@@ -629,12 +636,40 @@ label input:valid + .label-text {
 
 .particles {
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
   position: absolute;
   left: -15%;
   z-index: 1;
 }
 
+.particles2 {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 3.5em;
+  z-index: 1;
+}
+
+.particles3 {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 4000px;
+  left: 0%;
+  z-index: 1;
+}
+
 .part-cntr {
   position: flex;
+}
+
+.tilebar {
+display: block;
+height: auto;
+overflow: none;
+}
+
+.news-filter:hover {
+  background-color: rgba(255, 255, 255, 0.12);
 }

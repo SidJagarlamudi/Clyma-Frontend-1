@@ -62,7 +62,7 @@ const NavBar = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position="static">
+      <AppBar position="static" zIndex={2}>
         <div className="menu2">
           <Tabs
             value={selectedTab}

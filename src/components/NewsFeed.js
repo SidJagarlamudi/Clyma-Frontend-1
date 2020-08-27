@@ -1,20 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { fetchLocationsSuccess } from '../actions/location'
-import { fetchStatSuccess } from '../actions/stat'
-import { fetchCitiesSuccess } from '../actions/city'
 import { currentUser } from '../actions/auth'
-import ClimateMap from './ClimateMap'
-import Geocode from "react-geocode";
-import climScores from './climScores.json'
 import NewsCard from './NewsCard';
 import Grid from '@material-ui/core/Grid';
-import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import GridListTile from '@material-ui/core/GridListTile';
+import Particles from 'react-particles-js';
+
+
 
 class NewsFeed extends React.Component {
 
@@ -49,49 +44,21 @@ class NewsFeed extends React.Component {
       })
       .then(resp => resp.json())
       .then(news => {
+        let articlesWithImgs = news.value.filter((article)=>{
+          return article.image.url !== ""
+        })
         this.setState({
-          newsArticles: news.value
+          newsArticles: articlesWithImgs
         })
       })
     }
   }
 
-  renderFirst3rd = () => {
-    const length = this.state.newsArticles.length
-    const one3rd = length / 3
-    const roundedUp = Math.ceil(one3rd)
-    const first3rd = this.state.newsArticles.slice(0, roundedUp)
-    console.log(first3rd)
-    return first3rd.map((article)=>{
-      return <NewsCard article={article}/>
-    })
-  }
-
-  renderSecond3rd = () => {
-    const length = this.state.newsArticles.length
-    const one3rd = length / 3
-    const roundedUp = Math.ceil(one3rd)
-    const second3rd = this.state.newsArticles.slice(roundedUp, roundedUp * 2)
-    return second3rd.map((article)=>{
-      return <NewsCard article={article}/>
-    })
-  }
-
-  renderThird3rd = () => {
-    const length = this.state.newsArticles.length
-    const one3rd = length / 3
-    const roundedUp = Math.ceil(one3rd)
-    const third3rd = this.state.newsArticles.slice(roundedUp * 2, roundedUp * 3)
-    return third3rd.map((article)=>{
-      return <NewsCard article={article} />
-    })
-  }
-
   handleSelect = (e) => {
     if (e.target.value == 1){
       const ascendingArr = this.state.newsArticles.sort((a, b) => {
-        let firstDate = new Date(a.publishedAt)
-        let secondDate = new Date(b.publishedAt)
+        let firstDate = new Date(a.datePublished)
+        let secondDate = new Date(b.datePublished)
         return firstDate - secondDate
       })
       this.setState({
@@ -99,8 +66,8 @@ class NewsFeed extends React.Component {
       })
     } else {
       const decArr = this.state.newsArticles.sort((a, b) => {
-        let firstDate = new Date(a.publishedAt)
-        let secondDate = new Date(b.publishedAt)
+        let firstDate = new Date(a.datePublished)
+        let secondDate = new Date(b.datePublished)
         return secondDate - firstDate
       })
       this.setState({
@@ -109,13 +76,22 @@ class NewsFeed extends React.Component {
     }
   }
 
+  test = () => {
+    return this.state.newsArticles.map((art)=>{
+      return <GridListTile key={art.id}>
+      {art.image.url}
+    </GridListTile>
+    })
+  }
+
   render(){ 
       return (
-        <div style={{backgroundColor: '#424242', color: '#FFFFFF'}}>
-          {/* <h2>Unfortunately the News API ‘production plan’ is too expensive for me to include it on this production app. However, an alternative news API source is coming very soon! </h2> */}
+        <div style={{backgroundColor: '#000000', color: '#FFFFFF'}}>
+          
+          <p>&nbsp;</p>
         <FormControl>
-        <InputLabel style={{color:'white'}} htmlFor="grouped-native-select">Filter By:</InputLabel>
-        <Select style={{color:'white'}} native defaultValue="" id="grouped-native-select" onChange={this.handleSelect}>
+        <InputLabel style={{color:'white', zIndex: 4, left: '4%'}} htmlFor="grouped-native-select">Filter By:</InputLabel>
+        <Select style={{color:'white', zIndex: 3, backgroundColor: '#303030', borderRadius: '8px'}} className='news-filter' native defaultValue="" id="grouped-native-select" onChange={this.handleSelect}>
           <option aria-label="None" value="" />
           <optgroup label="Date Published" className='maybe'>
             <option value={1}>↑ Ascending (Oldest to Newest)</option>
@@ -127,22 +103,85 @@ class NewsFeed extends React.Component {
           <Grid
             container
             direction="row"
-            justify="flex-start"
-            alignItems="flex-start"
-            spacing={0}
+            justify="center"
+            alignItems="center"
+            spacing={2}
             >
-          <Grid item xs>
-            {this.renderFirst3rd()}
+          {this.state.newsArticles.map(article => (
+            <Grid item xs={4} style={{zIndex: 2}}>
+              <NewsCard article={article}/>
             </Grid>
-            <Grid item xs>
-            {this.renderSecond3rd()}
-            </Grid>
-            <Grid item xs>
-            {this.renderThird3rd()}
-            </Grid>
-
-
-          </Grid>
+          ))}
+  </Grid>
+  <Particles
+      width='100vw'
+      height='4000px'
+    canvasClassName={'particles2'}
+    params={{
+	    "particles": {
+	        "number": {
+	            "value": 200,
+	            "density": {
+	                "enable": true,
+	                "value_area": 2000
+	            }
+	        },
+	        "line_linked": {
+	            "enable": true,
+	            "opacity": 0.1
+	        },
+	        "move": {
+	            "direction": "right",
+	            "speed": 0.20
+	        },
+	        "size": {
+	            "value": 1
+	        },
+	        "opacity": {
+	            "anim": {
+	                "enable": true,
+	                "speed": 1,
+	                "opacity_min": 0.05
+	            }
+	        }
+	    },
+	    "retina_detect": true
+	}} />
+  <Particles
+      width='100vw'
+      height='5200px'
+    canvasClassName={'particles3'}
+    params={{
+	    "particles": {
+	        "number": {
+	            "value": 200,
+	            "density": {
+	                "enable": true,
+	                "value_area": 2000
+	            }
+	        },
+	        "line_linked": {
+	            "enable": true,
+	            "opacity": 0.1
+	        },
+	        "move": {
+	            "direction": "right",
+	            "speed": 0.20
+	        },
+	        "size": {
+	            "value": 1
+	        },
+	        "opacity": {
+	            "anim": {
+	                "enable": true,
+	                "speed": 1,
+	                "opacity_min": 0.05
+	            }
+	        }
+	    },
+	    "retina_detect": true
+	}} />
+  
         </div>)
   };
 }

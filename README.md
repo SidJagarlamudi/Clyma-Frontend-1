@@ -161,7 +161,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-John Loberger - [My Website](http://jloberger.com) - johnloberger@gmail.com
+John Loberger - [My Website](https://jloberger.com) - johnloberger@gmail.com
 
 Project Link: [https://github.com/johnloberger/Clyma-Frontend](https://github.com/johnloberger/Clyma-Frontend)
 

@@ -74,6 +74,7 @@ Below are all of the technologies, libraries, and packages I used to create this
 * [Google Geocoding](https://developers.google.com/maps/documentation/geocoding/overview)
 * [Google Places Autocomplete](https://developers.google.com/places/web-service/autocomplete)
 * [World Air Quality Index API](https://aqicn.org/api/)
+* [Contextual Web API](https://contextualweb.io/)
 * [Climate Score™ API](https://rapidapi.com/sameckhouse/api/climate-score)
 
 

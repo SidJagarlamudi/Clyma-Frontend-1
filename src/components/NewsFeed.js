@@ -40,13 +40,12 @@ class NewsFeed extends React.Component {
         console.log(data)
         this.props.currentUser(data)
       })
-      fetch("https://bing-news-search1.p.rapidapi.com/news/search?count=20&freshness=Day&textFormat=Raw&safeSearch=Off&q=climate%20change", {
-        "method": "GET",
-        "headers": {
-          "x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
-          "x-rapidapi-key": "c5855f8358mshe884588b34ae70ep1a1627jsn5e1e97c23a80",
-          "x-bingapis-sdk": "true"
-        }
+      fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=1&pageSize=50&q=climate%20change&safeSearch=false", {
+	      "method": "GET",
+      	"headers": {
+	    	"x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+	    	"x-rapidapi-key": "c5855f8358mshe884588b34ae70ep1a1627jsn5e1e97c23a80"
+	    }
       })
       .then(resp => resp.json())
       .then(news => {

@@ -104,9 +104,8 @@ export function NewsCard(props) {
     <Card className={cx(styles.root, shadowStyles.root)}>
       <CardMedia
         style={{ height: `${randomImgHeight}px` }}
-        // classes={mediaStyles}
         className="news-img"
-        image={props.article.image.thumbnail.contentUrl}
+        image={props.article.image.url}
       />
       <CardContent>
         <TextInfoContent
@@ -115,10 +114,10 @@ export function NewsCard(props) {
             "published on: " +
             props.article.datePublished.substring(0, 10) +
             ", by: " +
-            props.article.provider[0].name
+            props.article.provider.name
           }
-          heading={props.article.name}
-          body={props.article.description}
+          heading={props.article.title.replace(/<(.|\n)*?>/g, '')}
+          body={props.article.description.replace(/<(.|\n)*?>/g, '')}
         />
         <div>
           <button onClick={handleOpen} class="button  arrow">
@@ -140,13 +139,13 @@ export function NewsCard(props) {
           <Fade in={open}>
             <div className={modalStyles.paper}>
               <a href={props.article.url} id="transition-modal-title">
-                {props.article.name}{" "}
+                {props.article.title.replace(/<(.|\n)*?>/g, '')}{" "}
               </a>
               <p class="pub-date">
                 {"published on: " +
                   props.article.datePublished.substring(0, 10) +
                   ", by: " +
-                  props.article.provider[0].name}
+                  props.article.provider.name}
               </p>
               <p id="transition-modal-description">
                 <Iframe

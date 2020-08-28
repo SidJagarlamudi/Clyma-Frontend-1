@@ -30,12 +30,12 @@ const NavBar = (props) => {
   });
 
   const tabNameToIndex = {
-    0: "home",
+    0: "map",
     1: "news",
     2: "login",
   };
   const indexToTabName = {
-    home: 0,
+    map: 0,
     news: 1,
     login: 2,
   };
@@ -69,7 +69,7 @@ const NavBar = (props) => {
             onChange={handleChange}
             indicatorColor="primary"
           >
-            <Tab label="Home" className={"menu-tab"} />
+            <Tab label="Map" className={"menu-tab"} />
             <Tab label="News" className={"menu-tab"} />
             <div class='nav-logo'>
             <img onClick={logoClick} style={{height: '30px', width: '100px', top: '.65em', position: 'relative'}}src={Clymanew} alt='logo' ></img>

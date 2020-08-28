@@ -12,7 +12,8 @@ class Login extends React.Component {
       pw: "",
       email: "",
       showSignUp: false,
-      showLoading: false
+      showLoading: false,
+      promptDemo: false,
     };
   }
 
@@ -80,6 +81,18 @@ class Login extends React.Component {
       [event.target.name]: event.target.value,
     });
   };
+
+  signupHover = () => {
+    this.setState({
+      promptDemo: true
+    })
+  }
+
+  signupHoverOut = () => {
+    this.setState({
+      promptDemo: false
+    })
+  }
 
   render() {
     return (
@@ -158,12 +171,13 @@ class Login extends React.Component {
                 </button>
                 <br></br>
                 <br></br>
-                <a href style={{ color: "white" }} onClick={this.showSignUp}>
+                <a href onClick={this.showSignUp} onMouseOver={this.signupHover} onMouseOut={this.signupHoverOut} className='signup-link'>
                   or Sign-Up
                 </a>
               </form>
             </div>
           ) : null}
+          {this.state.promptDemo ? <h2 style={{zIndex: 5, position: 'absolute', color: '#FFFFFF', left: '2%'}}>For demo purposes => username: 'demo' password: 'demo'</h2>:null}
         </div>
         {this.state.showLoading ? <img src='https://media1.giphy.com/media/SUuSRBp7BBjUOEf5Kg/giphy.gif' alt='loading'></img>:null}
         <LoginBG />

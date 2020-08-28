@@ -285,7 +285,9 @@ export class ClimateMap extends Component {
   };
 
   addLocation = () => {
-    if (this.state.data !== false) {
+    if (this.state.auth === undefined){
+      alert('You must be logged in to use this feature.')
+    } else if (this.state.data !== false) {
       const newLocation = {
         name: this.state.data.city.name,
         user_id: this.props.auth.id,
@@ -754,7 +756,7 @@ export class ClimateMap extends Component {
                   initialCenter={this.state.coords}
                   center={this.state.coords}
                   onClick={this.mapCLicked}
-                  zoom={14}
+                  zoom={8}
                 >
                   <div className="filter">
                     <Dropdown

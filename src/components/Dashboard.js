@@ -14,20 +14,22 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     const token = localStorage.getItem("token");
-    if (!token) {
-      this.props.history.push("/login");
-    } else {
+    // if (!token) {
+    //   this.props.history.push("/login");
+    // } else {
       const reqObj = {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       };
-      fetch("https://myclimate.herokuapp.com/current_user", reqObj)
-        .then((resp) => resp.json())
-        .then((data) => {
-          this.props.currentUser(data);
-        });
+      if (token){
+        fetch("https://myclimate.herokuapp.com/current_user", reqObj)
+          .then((resp) => resp.json())
+          .then((data) => {
+            this.props.currentUser(data);
+          });
+      }
       fetch(
         "https://api.waqi.info/map/bounds/?latlng=85,-180,-85.05115,180&token=87b2bba6a5b2e26c577ffc48e297eaed82a8408c"
       )
@@ -37,7 +39,7 @@ class Dashboard extends React.Component {
           let x = stations.data.slice(0, 4500);
           this.props.fetchStatSuccess(y);
         });
-    }
+    // }
   }
 
   render() {

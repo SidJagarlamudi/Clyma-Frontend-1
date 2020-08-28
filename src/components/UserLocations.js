@@ -17,15 +17,17 @@ export class UserLocations extends Component {
   }
 
   componentDidMount(){
-    fetch('https://myclimate.herokuapp.com/locations')
-    .then(resp => resp.json())
-    .then(locations => {
-      console.log(this.props)
-      console.log(this.state)
-      const myLocations = locations.filter(loc => loc.user_id === this.props.auth.id)
-      console.log(myLocations)
-      this.setState({usersLocations: myLocations})
-    })
+    if (this.props.null !== undefined) {
+      fetch('https://myclimate.herokuapp.com/locations')
+      .then(resp => resp.json())
+      .then(locations => {
+        console.log(this.props)
+        console.log(this.state)
+        const myLocations = locations.filter(loc => loc.user_id === this.props.auth.id)
+        console.log(myLocations)
+        this.setState({usersLocations: myLocations})
+      })
+    }
   }
 
   handleDelete = (id) => {
@@ -48,8 +50,10 @@ export class UserLocations extends Component {
   }
 
   render(){
-    console.log(this.state)
-    if (this.state.usersLocations === false){
+    console.log(this.props)
+    if (this.props.auth === null) {
+      return <div><h4>You must be logged in to save locations.</h4></div>
+    } else if (this.state.usersLocations === false){
       return <div><h4>You have no saved locations.</h4></div>
     } else {
     return this.state.usersLocations.map((location)=>{

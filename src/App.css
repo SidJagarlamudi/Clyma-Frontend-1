@@ -241,6 +241,7 @@
 }
 
 .menu-login-tab {
+  position: relative;
   margin-left: auto;
   color: white;
 }
@@ -269,8 +270,9 @@
 }
 
 .nav-logo {
-  position: relative;
-  margin-left: auto;
+  position: absolute;
+  left: 46.55%;
+  top: .65em;
   transition: all 0.1s ease-in-out;
   /* margin-right: auto; */
 }

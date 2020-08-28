@@ -72,7 +72,7 @@ const NavBar = (props) => {
             <Tab label="Map" className={"menu-tab"} />
             <Tab label="News" className={"menu-tab"} />
             <div class='nav-logo'>
-            <img onClick={logoClick} style={{height: '30px', width: '100px', top: '.65em', position: 'relative'}}src={Clymanew} alt='logo' ></img>
+            <img onClick={logoClick} style={{height: '30px', width: '100px', top: '.65em'}}src={Clymanew} alt='logo' ></img>
             </div>
             {props.auth ? (
               <div className={"menu-logout-tab"}>

@@ -5,7 +5,6 @@ import { Route, Redirect, BrowserRouter } from 'react-router-dom';
 import LandingPage from './LandingPage'
 
 
-
 function App() {
 
   return (
@@ -16,6 +15,7 @@ function App() {
       </div>
     </BrowserRouter>
   );
+
 }
 
-export default App;
+export default App

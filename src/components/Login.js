@@ -42,7 +42,7 @@ class Login extends React.Component {
           this.setState({
             showLoading: true
           })
-          this.props.history.push("/home");
+          this.props.history.push("/map");
         }
       });
   };

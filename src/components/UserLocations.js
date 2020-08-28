@@ -17,7 +17,7 @@ export class UserLocations extends Component {
   }
 
   componentDidMount(){
-    if (this.props.null !== undefined) {
+    if (this.props.auth !== null || undefined) {
       fetch('https://myclimate.herokuapp.com/locations')
       .then(resp => resp.json())
       .then(locations => {

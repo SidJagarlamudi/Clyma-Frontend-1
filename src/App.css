@@ -9,8 +9,25 @@
 .search {
   position: absolute;
   width: 300px;
-  top: 7.89%;
+  top: 8.1%;
   z-index: 10;
+}
+
+.search-lp {
+  position: absolute;
+  width: 400px;
+  top: 42em;
+  z-index: 10;
+  margin: 0 auto;
+  border: thin solid #FFFFFF;
+}
+
+.search-lp:hover {
+  border: thin solid #83ffe1;
+}
+
+::placeholder{
+  color: white;
 }
 
 .App-logo {
@@ -253,7 +270,6 @@
 
 .nav-logo {
   position: relative;
-  left: -5%;
   margin-left: auto;
   transition: all 0.1s ease-in-out;
   /* margin-right: auto; */
@@ -634,6 +650,14 @@ label input:valid + .label-text {
   z-index: 5;
 }
 
+.intro {
+  color: #FFFFFF;
+  position: absolute;
+  z-index: 5;
+  top: 15em;
+  left: 13%;
+}
+
 .particles {
   height: 100vh;
   width: 100vw;
@@ -682,3 +706,14 @@ overflow: none;
   cursor: pointer;
   color: #83ffe1;
 }
+
+.slogan {
+  position: absolute;
+  z-index: 10;
+  color: #83ffe1;
+  top: 37em;
+  margin: 0 auto;
+}
+
+
+

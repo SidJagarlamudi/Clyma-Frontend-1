@@ -101,24 +101,14 @@ export class ClimateMap extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:3001/locations")
-      .then((resp) => resp.json())
-      .then((locations) => {
-        const usersLocations = locations.filter(
-          (loc) => loc.user_id === this.props.auth.id
-        );
-        this.setState({
-          myLocations: usersLocations,
-        });
-      });
-    navigator.geolocation.getCurrentPosition((position) => {
-      let lat = position.coords.latitude;
-      let lng = position.coords.longitude;
-      let currentLocation = { lat: lat, lng: lng };
-      this.setState({
-        coords: currentLocation,
-      });
-    });
+    // navigator.geolocation.getCurrentPosition((position) => {
+    //   let lat = position.coords.latitude;
+    //   let lng = position.coords.longitude;
+    //   let currentLocation = { lat: lat, lng: lng };
+    //   this.setState({
+    //     coords: currentLocation,
+    //   });
+    // });
   }
 
   onMarkerDragEnd = (coord) => {
@@ -285,7 +275,7 @@ export class ClimateMap extends Component {
   };
 
   addLocation = () => {
-    if (this.state.auth === undefined){
+    if (this.props.auth === null || undefined){
       alert('You must be logged in to use this feature.')
     } else if (this.state.data !== false) {
       const newLocation = {
@@ -347,6 +337,10 @@ export class ClimateMap extends Component {
   };
 
   render() {
+    const searchLat = localStorage.getItem("searchLat");
+    const searchLng = localStorage.getItem("searchLng");
+    const searchCoords = {lat: parseFloat(searchLat),lng: parseFloat(searchLng)}
+    console.log(searchCoords)
     let aqiColor;
     if (this.state.data !== false && this.state.data.aqi <= 50) {
       aqiColor = "#c1ff7a";
@@ -719,11 +713,11 @@ export class ClimateMap extends Component {
                 ref={(search) => (this._search = search)}
                 onSelect={this.handleSubmit}
                 inputStyle={{
-                  background: "rgba(255, 255, 255, 0.3)",
+                  background: "rgba(0, 0, 0, 0.3)",
                   color: "#FFFFFF",
                   "border-radius": "1px",
                 }}
-                placeholder="🔎 Search Anywhere!"
+                placeholder="🔎 Search"
                 suggestionsStyles={{
                   background: "none",
                   "border-radius": "1px",
@@ -753,7 +747,7 @@ export class ClimateMap extends Component {
                       .LEFT_CENTER,
                   }}
                   onCenterChanged={() => {}}
-                  initialCenter={this.state.coords}
+                  initialCenter={searchCoords}
                   center={this.state.coords}
                   onClick={this.mapCLicked}
                   zoom={8}

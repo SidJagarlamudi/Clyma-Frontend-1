@@ -33,9 +33,7 @@ function useWindowSize() {
 
 const useStyles = makeStyles(() => ({
   root: {
-    // maxWidth: 304,
     margin: "auto",
-    // boxShadow: 'none',
     borderRadius: 0,
     backgroundColor: "#303030",
   },

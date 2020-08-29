@@ -339,8 +339,12 @@ export class ClimateMap extends Component {
   render() {
     const searchLat = localStorage.getItem("searchLat");
     const searchLng = localStorage.getItem("searchLng");
-    const searchCoords = {lat: parseFloat(searchLat),lng: parseFloat(searchLng)}
-    console.log(searchCoords)
+    let searchCoords
+    if (searchLat){
+      searchCoords = {lat: parseFloat(searchLat),lng: parseFloat(searchLng)}
+    } else {
+      searchCoords = this.state.coords
+    }
     let aqiColor;
     if (this.state.data !== false && this.state.data.aqi <= 50) {
       aqiColor = "#c1ff7a";

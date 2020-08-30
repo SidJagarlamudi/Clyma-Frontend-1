@@ -1007,8 +1007,9 @@ export class ClimateMap extends Component {
                                 fontColor: "#FFFFFF",
                               },
                               legend: {
-                                display: false,
+                                display: true,
                                 position: "top",
+                                fontColor: "#FFFFFF"
                               },
                             }}
                           />

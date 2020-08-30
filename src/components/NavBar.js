@@ -5,6 +5,7 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
+import DonateDashboard from './DonateDashboard'
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { logoutUser } from "../actions/auth";
@@ -33,11 +34,13 @@ const NavBar = (props) => {
     0: "map",
     1: "news",
     2: "login",
+    3: "donate"
   };
   const indexToTabName = {
     map: 0,
     news: 1,
     login: 2,
+    donate: 3
   };
 
   const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
@@ -71,6 +74,7 @@ const NavBar = (props) => {
           >
             <Tab label="Map" className={"menu-tab"} />
             <Tab label="News" className={"menu-tab"} />
+            <Tab label="Donate" className={"menu-tab"} />
             <div class='nav-logo'>
             <img onClick={logoClick} style={{height: '30px', width: '100px', top: '.65em'}}src={Clymanew} alt='logo' ></img>
             </div>
@@ -95,6 +99,7 @@ const NavBar = (props) => {
       {selectedTab === 2 && (
         <Login style={{ backgroundColor: "#303030" }} {...props} />
       )}
+      {selectedTab === 3 && <DonateDashboard {...props} />}
 
     </ThemeProvider>
   );

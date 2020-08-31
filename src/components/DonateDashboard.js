@@ -6,7 +6,7 @@ class Dashboard extends React.Component {
 
   render() {
     return <div>
-      <h1>Donation Page</h1>
+      <h2 style={{color: '#FFFFFF'}}>Ability to donate to #TeamTrees API is coming very soon!</h2>
     </div>
   }
 }

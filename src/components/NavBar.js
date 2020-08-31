@@ -33,14 +33,14 @@ const NavBar = (props) => {
   const tabNameToIndex = {
     0: "map",
     1: "news",
-    2: "login",
-    3: "donate"
+    2: "donate",
+    3: "login",
   };
   const indexToTabName = {
     map: 0,
     news: 1,
-    login: 2,
-    donate: 3
+    donate: 2,
+    login: 3,
   };
 
   const [selectedTab, setSelectedTab] = React.useState(indexToTabName[page]);
@@ -96,10 +96,10 @@ const NavBar = (props) => {
       </AppBar>
       {selectedTab === 0 && <Dashboard {...props} />}
       {selectedTab === 1 && <NewsFeed {...props} />}
-      {selectedTab === 2 && (
+      {selectedTab === 2 && <DonateDashboard {...props} />}
+      {selectedTab === 3 && (
         <Login style={{ backgroundColor: "#303030" }} {...props} />
       )}
-      {selectedTab === 3 && <DonateDashboard {...props} />}
 
     </ThemeProvider>
   );

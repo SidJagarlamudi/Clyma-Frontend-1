@@ -44,7 +44,6 @@ export class ClimateMap extends Component {
       lat: "",
       lng: "",
     },
-    showInfo: false,
     activeMarker: {},
     activeCSMarker: false,
     data: false,
@@ -61,7 +60,7 @@ export class ClimateMap extends Component {
     this.setState({ hovered: true, activeMarker: marker });
   };
 
-  mouseLeaveHandler = (marker) => {
+  mouseLeaveHandler = () => {
     this.setState({ hovered: false });
   };
 
@@ -141,7 +140,6 @@ export class ClimateMap extends Component {
     Geocode.setApiKey("AIzaSyDmc1KD6Xr80d3hduc4Q2MObw1uotQuY-8");
     Geocode.fromAddress(`${value.description}`).then((response) => {
       const { lat, lng } = response.results[0].geometry.location;
-
       this.setState({
         coords: {
           lat: lat,
@@ -242,12 +240,6 @@ export class ClimateMap extends Component {
     }
   };
 
-  mouseOut = (e) => {
-    this.setState({
-      showInfo: false,
-    });
-  };
-
   onMarkerClick = (marker, e) => {
     fetch(
       `https://api.waqi.info/feed/geo:${marker.info.lat};${marker.info.lon}/?token=87b2bba6a5b2e26c577ffc48e297eaed82a8408c`
@@ -330,6 +322,7 @@ export class ClimateMap extends Component {
       modalOpen: "block",
     });
   };
+  
   handleModalClose = () => {
     this.setState({
       modalOpen: "none",
@@ -750,10 +743,8 @@ export class ClimateMap extends Component {
                     position: this.props.google.maps.ControlPosition
                       .LEFT_CENTER,
                   }}
-                  onCenterChanged={() => {}}
                   initialCenter={searchCoords}
                   center={this.state.coords}
-                  onClick={this.mapCLicked}
                   zoom={8}
                 >
                   <div className="filter">
@@ -767,27 +758,11 @@ export class ClimateMap extends Component {
                   </div>
                   {this.state.showAQI ? (
                     <Markers
-                      onClick={this.onMarkerClick}
                       onMouseover={this.mouseEnterHandler}
                       onMouseout={this.mouseLeaveHandler}
-                    ></Markers>
+                    />
                   ) : null}
                   {!this.state.showAQI ? this.renderClimateScores() : null}
-                  <InfoWindow
-                    marker={this.state.activeMarker}
-                    maxWidth={175}
-                    onMouseover={() => this.showInfo()}
-                    style={{ "background-color": "#000000" }}
-                    visible={this.state.showInfo}
-                  >
-                    <div>
-                      <h4>
-                        {this.state.showInfo
-                          ? this.state.activeMarker.info.station.name
-                          : null}{" "}
-                      </h4>
-                    </div>
-                  </InfoWindow>
                 </Map>
               </div>
             </Grid>

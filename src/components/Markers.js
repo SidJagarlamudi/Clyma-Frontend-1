@@ -2,18 +2,17 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { Marker } from "google-maps-react";
 
-class MyMarkers extends PureComponent {
+class Markers extends PureComponent {
   render() {
     const google = this.props.google;
     let iw = 70,
       ih = 94;
-    return this.props.stats.map((statObj, key) => {
+    return this.props.stats.map((statObj) => {
       if (statObj.aqi !== "-")
-        return (
+        return(
           <Marker
             info={statObj}
             position={{ lat: statObj.lat, lng: statObj.lon }}
-            // onClick={this.props.onMarkerClick}
             id={statObj.uid}
             onMouseover={this.props.mouseEnterHandler}
             onMouseout={this.props.mouseLeaveHandler}
@@ -35,4 +34,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(MyMarkers);
+export default connect(mapStateToProps, null)(Markers);

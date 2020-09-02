@@ -322,7 +322,7 @@ export class ClimateMap extends Component {
       modalOpen: "block",
     });
   };
-  
+
   handleModalClose = () => {
     this.setState({
       modalOpen: "none",
@@ -938,6 +938,11 @@ export class ClimateMap extends Component {
                             this.state.data.time.s
                           : null}
                       </Typography>
+                      <Typography color="textSecondary">
+                        {this.state.data !== false
+                          ? <div><span style={{color: 'white', fontSize: 16}}>Daily Air Pollution Forecast </span>-<span style={{color: '#f7ff66', fontSize: 16}}>  Max </span>|<span style={{color: '#4a9eff', fontSize: 16}}> Avg </span>|<span style={{color: '#87ff9f', fontSize: 16}}> Min</span></div>
+                          : null}
+                      </Typography>
                       {this.state.data !== false &&
                       this.state.data.forecast.daily !== undefined ? (
                         <div>
@@ -982,9 +987,7 @@ export class ClimateMap extends Component {
                                 fontColor: "#FFFFFF",
                               },
                               legend: {
-                                display: true,
-                                position: "top",
-                                fontColor: "#FFFFFF"
+                                display: false,
                               },
                             }}
                           />
@@ -1030,7 +1033,6 @@ export class ClimateMap extends Component {
                               },
                               legend: {
                                 display: false,
-                                position: "top",
                               },
                             }}
                           />
@@ -1076,7 +1078,6 @@ export class ClimateMap extends Component {
                               },
                               legend: {
                                 display: false,
-                                position: "top",
                               },
                             }}
                           />
@@ -1120,7 +1121,6 @@ export class ClimateMap extends Component {
                               },
                               legend: {
                                 display: false,
-                                position: "top",
                               },
                             }}
                           />

@@ -56,59 +56,13 @@ export class ClimateMap extends Component {
     mapStyle: null,
   };
 
-  mouseEnterHandler = (marker, e) => {
-    this.setState({ hovered: true, activeMarker: marker });
-  };
+  // mouseEnterHandler = (marker, e) => {
+  //   this.setState({ hovered: true, activeMarker: marker });
+  // };
 
-  mouseLeaveHandler = () => {
-    this.setState({ hovered: false });
-  };
-
-  componentWillUnmount() {
-    this.clearTimer();
-  }
-
-  onTimeout = () => {
-    fetch(
-      `https://api.waqi.info/feed/geo:${this.state.activeMarker.info.lat};${this.state.activeMarker.info.lon}/?token=87b2bba6a5b2e26c577ffc48e297eaed82a8408c`
-    )
-      .then((resp) => resp.json())
-      .then((data) => {
-        if (this.state.showUserLocations) {
-          this.setState({
-            data: data.data,
-            showUserLocations: false,
-          });
-        } else {
-          this.setState({
-            data: data.data,
-          });
-        }
-      });
-  };
-
-  clearTimer = () => {
-    clearTimeout(this.timer);
-  };
-
-  componentDidUpdate() {
-    if (this.state.hovered) {
-      this.timer = setTimeout(this.onTimeout, 500);
-    } else {
-      this.clearTimer();
-    }
-  }
-
-  componentDidMount() {
-    // navigator.geolocation.getCurrentPosition((position) => {
-    //   let lat = position.coords.latitude;
-    //   let lng = position.coords.longitude;
-    //   let currentLocation = { lat: lat, lng: lng };
-    //   this.setState({
-    //     coords: currentLocation,
-    //   });
-    // });
-  }
+  // mouseLeaveHandler = () => {
+  //   this.setState({ hovered: false });
+  // };
 
   onMarkerDragEnd = (coord) => {
     const { latLng } = coord;
@@ -758,6 +712,7 @@ export class ClimateMap extends Component {
                   </div>
                   {this.state.showAQI ? (
                     <Markers
+                      onClick={this.onMarkerClick}
                       onMouseover={this.mouseEnterHandler}
                       onMouseout={this.mouseLeaveHandler}
                     />

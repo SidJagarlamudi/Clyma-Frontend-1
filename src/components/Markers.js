@@ -14,6 +14,7 @@ class Markers extends PureComponent {
             info={statObj}
             position={{ lat: statObj.lat, lng: statObj.lon }}
             id={statObj.uid}
+            onClick={this.props.onMarkerClick}
             onMouseover={this.props.mouseEnterHandler}
             onMouseout={this.props.mouseLeaveHandler}
             {...this.props}

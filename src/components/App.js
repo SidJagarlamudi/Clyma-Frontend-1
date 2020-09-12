@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 import NavBar from './NavBar';
-import { Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { Route, BrowserRouter } from 'react-router-dom';
 import LandingPage from './LandingPage'
 
 

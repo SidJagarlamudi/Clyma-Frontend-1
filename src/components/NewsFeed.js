@@ -18,18 +18,20 @@ class NewsFeed extends React.Component {
   }
   
   componentDidMount(){
-      fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/NewsSearchAPI?autoCorrect=false&pageNumber=1&pageSize=50&q=climate%20change&safeSearch=false", {
-	      "method": "GET",
-      	"headers": {
-	    	"x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-	    	"x-rapidapi-key": "c5855f8358mshe884588b34ae70ep1a1627jsn5e1e97c23a80"
-	    }
-      })
+    fetch("https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?toPublishedDate=null&fromPublishedDate=null&withThumbnails=true&pageSize=50&q=climate%20change&autoCorrect=false&pageNumber=1", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+		"x-rapidapi-key": "c5855f8358mshe884588b34ae70ep1a1627jsn5e1e97c23a80"
+	  }
+    })
       .then(resp => resp.json())
       .then(news => {
+        console.log(news)
         let articlesWithImgs = news.value.filter((article)=>{
           return article.image.url !== ""
         })
+        console.log(articlesWithImgs)
         this.setState({
           newsArticles: articlesWithImgs
         })
@@ -67,6 +69,7 @@ class NewsFeed extends React.Component {
   }
 
   render(){ 
+    console.log(this.state.newsArticles)
       return (
         <div style={{backgroundColor: '#000000', color: '#FFFFFF'}}>
           
